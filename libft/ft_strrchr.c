@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:09:41 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 18:46:03 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:21:06 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strrchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == c)
-			result = s + i;
+			result = (char *)s + i;
 		i++;
 	}
 	return (result);

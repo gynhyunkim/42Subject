@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:56:20 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 17:35:24 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:20:29 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	unsigned char *s;
 
 	tmp = dst;
-	s = src;
+	s = (unsigned char *)src;
 	if (dst < src)
 	{
 		while (len--)
@@ -33,6 +33,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		while (--len)
 			*(tmp + len) = *(s + len);
 	}
-	dst = memcpy(dst, tmp, ft_strlen(tmp));
+	dst = ft_memcpy(dst, tmp, ft_strlen((const char *)tmp));
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 17:47:46 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 17:59:28 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:18:49 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	return (memset(malloc(nmemb * size), 0, nmemb * size));
+	return (ft_memset(malloc(nmemb * size), 0, nmemb * size));
 }

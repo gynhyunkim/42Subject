@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 14:33:25 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:22:31 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static int	ft_strcmp(const char *s1, const char *s2)
 
 char		*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t i;
+	int i;
 
 	i = 0;
-	while (i < len && big[i])
+	while (i < (int)len && big[i])
 	{
 		if (big[i] == little[0])
 		{
 			if (ft_strcmp(&big[i], little))
-				return (big + i);
+				return ((char *)big + i);
 		}
 		i++;
 	}

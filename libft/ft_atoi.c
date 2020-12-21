@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:39:22 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 14:56:27 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:24:28 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	jump_space(const char *str, int *idx)
 {
 	while (str[*idx] == '\n' || str[*idx] == '\t' || str[*idx] == '\v' || 
 	str[*idx] == '\r' || str[*idx] == '\f' || str[*idx] == ' ')
-		*idx++;
+		(*idx)++;
 } 
 
 static void chk_mark(const char c, int *mark, int *idx)
@@ -24,10 +24,10 @@ static void chk_mark(const char c, int *mark, int *idx)
 	if (c == '-')
 	{
 		*mark = -1;
-		*idx++;
+		(*idx)++;
 	}
 	else if (c == '+')
-		*idx++;
+		(*idx)++;
 }
 
 int			ft_atoi(const char *nptr)
@@ -41,7 +41,7 @@ int			ft_atoi(const char *nptr)
 	num = 0;
 	jump_space(nptr, &i);
 	chk_mark(nptr[i], &mark, &i);
-	while (ft_isnum(nptr[i]))
+	while (ft_isdigit(nptr[i]))
 	{
 		num = num * 10 + (nptr[i] % 10 - '0') * mark;
 		i++;
