@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:56:59 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 18:43:52 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 21:56:32 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int i;
-	
+
 	i = 0;
+	if (c == 0)
+		return ((char *)&s[ft_strlen(s)]);
 	while (s[i])
 	{
 		if (s[i] == c)
-			return ((char *)s + i);
+			return ((char *)&s[i]);
 		i++;
 	}
 	return (NULL);

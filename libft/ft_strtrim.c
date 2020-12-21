@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 18:19:25 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 20:18:23 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 21:56:17 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static	void	ft_trim(char const *s1, char const *set, char *result)
 
 char			*ft_strtrim(char const *s1, char const *set)
 {
-	char 	*result;
+	char	*result;
 	size_t	size;
-	
+
 	size = chk_size(s1, set);
 	result = (char *)malloc(size + 1);
 	result[0] = 0;

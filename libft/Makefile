@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-AFLAGS = rc
+AFLAGS = rsc
 NAME = libft.a
 SOURCES = $(wildcard *.c)
 OBJECTS = $(SOURCES:.c=.o)

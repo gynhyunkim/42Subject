@@ -3,38 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 20:22:31 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 21:59:44 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 || *s2)
-	{
-		if (*s1 != *s2)
-			return (0);
-		s1++;
-		s2++;
-	}
-	return (1);
-}
-
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+char		*ft_strnstr(const char *haystack, const char *niddle, size_t len)
 {
 	int i;
 
 	i = 0;
-	while (i < (int)len && big[i])
+	if (ft_strlen(niddle) == 0)
+		return ((char *)haystack);
+	while (i < (int)(len - ft_strlen(niddle)) && haystack[i])
 	{
-		if (big[i] == little[0])
+		if (haystack[i] == niddle[0])
 		{
-			if (ft_strcmp(&big[i], little))
-				return ((char *)big + i);
+			if (ft_strncmp(&haystack[i], niddle, ft_strlen(niddle)) == 0)
+				return ((char *)&haystack[i]);
 		}
 		i++;
 	}

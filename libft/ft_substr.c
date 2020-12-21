@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 18:08:13 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 18:16:03 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 20:33:23 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	result = (char *)malloc(len + 1);
 	if (result == NULL)
 		return (result);
+	i = 0;
 	while (i < (int)len)
 	{
 		result[i] = s[start + i];

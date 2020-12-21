@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:37:04 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 14:34:33 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/21 21:56:38 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < size - 1 && src[i] != 0)
+	while (i < (int)(size - 1) && src[i])
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	if (size > 0)
 		dst[i] = 0;
-	return (i);
+	return (ft_strlen(src));
 }
