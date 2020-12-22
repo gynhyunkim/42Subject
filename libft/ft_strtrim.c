@@ -6,49 +6,33 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 18:19:25 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:17 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/22 14:34:11 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	chk_size(char const *s1, char const *set)
+static	char	*ft_trim(char const *s1, char const *set)
 {
-	int		i;
-	size_t	size;
+	unsigned int	start;
+	unsigned int	end;
+	size_t			len;
 
-	i = 0;
-	size = 0;
-	while (s1[i])
-	{
-		if (ft_strchr(set, s1[i]) == NULL)
-			size++;
-		i++;
-	}
-	return (size);
-}
-
-static	void	ft_trim(char const *s1, char const *set, char *result)
-{
-	int		i;
-
-	i = 0;
-	while (s1[i])
-	{
-		if (ft_strchr(set, s1[i]) == NULL)
-			ft_strlcat(result, s1 + i, ft_strlen(result) + 2);
-		i++;
-	}
+	start = 0;
+	len = 0;
+	while(ft_strchr(set, s1[start]) != NULL)
+		start++;
+	end = ft_strlen(s1) - 1;
+	while(ft_strchr(set, s1[end]) != NULL)
+		end--;
+	len = (size_t)(end - start + 1);
+	return (ft_substr(s1, start, len));
 }
 
 char			*ft_strtrim(char const *s1, char const *set)
 {
 	char	*result;
-	size_t	size;
 
-	size = chk_size(s1, set);
-	result = (char *)malloc(size + 1);
-	result[0] = 0;
-	ft_trim(s1, set, result);
+	result = ft_trim(s1, set);
 	return (result);
 }
