@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 14:31:17 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/22 17:00:55 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/22 17:39:52 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	chk_digit(int n)
 	return (digit);
 }
 
-static char	*ft_convert(unsigned int n,	char *num)
+static char		*ft_convert(unsigned int n, char *num)
 {
 	int i;
 
@@ -43,16 +43,17 @@ static char	*ft_convert(unsigned int n,	char *num)
 	return (num);
 }
 
-char		*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	unsigned int num;
-	char		*result;
-	size_t		digit;
+	unsigned int	num;
+	char			*result;
+	size_t			digit;
 
 	digit = chk_digit(n);
 	result = (char *)malloc(digit + 1);
 	result = (char *)ft_memset(result, 1, digit);
 	result[digit] = 0;
+	num = 0;
 	if (n == 0)
 	{
 		result[0] = '0';

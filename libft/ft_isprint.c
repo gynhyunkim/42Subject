@@ -6,13 +6,13 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:23:48 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 22:00:40 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/22 17:42:41 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
 		return (1);
