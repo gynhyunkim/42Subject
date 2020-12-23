@@ -3,6 +3,6 @@
 
 int		main(void)
 {
-	printf("%s\n", ft_itoa(0));
+	printf("%d\n", atoi("1354214748364895"));
 	return (0);
 }
