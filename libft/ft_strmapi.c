@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 17:01:31 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/22 17:16:13 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/23 16:55:01 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	char			*result;
 
+	if (s == NULL)
+		return (NULL);
 	if (!(result = (char *)malloc(ft_strlen(s) + 1)))
 		return (result);
 	i = 0;
