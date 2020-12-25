@@ -10,8 +10,13 @@ $(NAME) : $(OBJECTS)
 
 all : $(NAME)
 
+so:
+	$(CC) -fPIC $(CFLAGS) $(SOURCES)
+	gcc -shared -o libft.so $(OBJECTS)
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
+
 
 clean :
 	rm -f $(OBJECTS)
@@ -20,5 +25,7 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+
 
 .PHONY : all clean fclean re
