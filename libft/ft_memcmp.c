@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 17:38:38 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:33 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/25 15:40:26 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int i;
+	unsigned char *m1;
+	unsigned char *m2;
 
-	i = 0;
-	while (i < (int)n)
+	m1 = (unsigned char *)s1;
+	m2 = (unsigned char *)s2;
+	while (n--)
 	{
-		if (*((unsigned char *)s1 + i) != *((unsigned char *)s2 + i))
-			return (*((unsigned char *)s1 + i) - *((unsigned char *)s2 + i));
-		i++;
+		if (*m1 != *m2)
+			return (*m1 - *m2);
+		m1++;
+		m2++;
 	}
 	return (0);
 }

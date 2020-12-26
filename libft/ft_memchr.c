@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 17:33:09 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:35 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/25 16:37:56 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
-	while (i < (int)n)
+	while (i < n)
 	{
 		if (*((unsigned char *)s + i) == (unsigned char)c)
 			return ((void *)s + i);

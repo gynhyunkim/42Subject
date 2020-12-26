@@ -1,12 +1,13 @@
+  
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/23 15:40:38 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/25 16:49:23 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +15,16 @@
 
 char		*ft_strnstr(const char *haystack, const char *niddle, size_t len)
 {
-	int i;
-
-	i = 0;
 	if (ft_strlen(niddle) == 0)
 		return ((char *)haystack);
-	while (i < (int)(len - ft_strlen(niddle)) && haystack[i])
+	while (len-- && *haystack)
 	{
-		if (haystack[i] == niddle[0])
+		if (*haystack == niddle[0] && len + 1 >= ft_strlen(niddle))
 		{
-			if (ft_memcmp(&haystack[i], niddle, ft_strlen(niddle)) == 0)
-				return ((char *)&haystack[i]);
+			if (ft_memcmp(haystack, niddle, ft_strlen(niddle)) == 0)
+				return ((char *)haystack);
 		}
-		i++;
+		haystack++;
 	}
 	return (NULL);
 }

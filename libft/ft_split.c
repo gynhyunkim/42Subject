@@ -6,13 +6,13 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:59:57 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/22 14:34:11 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/25 16:51:45 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	word_cnt(char const *s, char c)
+static int	cnt_word(char const *s, char c)
 {
 	int		cnt;
 	int		size;
@@ -38,16 +38,22 @@ static int	word_cnt(char const *s, char c)
 	return (cnt);
 }
 
-char		**ft_split(char const *s, char c)
+static char	**free_strs(char **strs, int j)
 {
-	int		cnt;
+	while (j--)
+	{
+		free(strs[j]);
+	}
+	free(strs);
+	return (NULL);
+}
+
+static char	**splitword(char *s, char c, char **strs, int cnt)
+{
 	int		i;
 	int		j;
-	char	**strs;
 	size_t	size;
 
-	cnt = word_cnt(s, c);
-	strs = (char **)malloc(sizeof(char *) * (cnt + 1));
 	i = 0;
 	j = 0;
 	size = 0;
@@ -56,13 +62,31 @@ char		**ft_split(char const *s, char c)
 		if (s[i] == c || s[i] == 0)
 		{
 			if (size != 0)
-				strs[j++] = ft_substr(s, i - size, size);
+			{
+				if ((strs[j] = ft_substr(s, i - size, size)) == NULL)
+					return (free_strs(strs, j));
+				j++;
+			}
 			size = 0;
 		}
 		else
 			size++;
 		i++;
 	}
-	strs[j] = NULL;
 	return (strs);
+}
+
+char		**ft_split(char const *s, char c)
+{
+	char	**strs;
+	int		cnt;
+
+	if (s == NULL)
+		return (NULL);
+	cnt = cnt_word(s, c);
+	strs = (char **)malloc(sizeof(char *) * (cnt + 1));
+	if (strs == NULL)
+		return (NULL);
+	strs[cnt] = NULL;
+	return (splitword((char *)s, c, strs, cnt));
 }

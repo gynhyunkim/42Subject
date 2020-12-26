@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:18:24 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:37 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/25 15:31:44 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t i;
+	unsigned char		*tmp;
+	const unsigned char	*s;
 
-	i = 0;
-	while (i < n)
-	{
-		*((unsigned char *)dest + i) = *((unsigned char *)src + i);
-		i++;
-	}
+	tmp = dest;
+	s = src;
+	if (!(dest || src))
+		return (NULL);
+	while (n--)
+		*tmp++ = *s++;
 	return (dest);
 }
