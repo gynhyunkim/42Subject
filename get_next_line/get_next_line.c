@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/05 16:04:27 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/05 16:50:10 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,46 @@
 int	get_next_line(int fd, char **line)
 {
 	int			rsize;
+	int			idx;
 	char		buf[BUFFER_SIZE + 1];
-	size_t		len;
-	char	*nullp;
+	char		*tmp;
 	static char	*backup;
 	
-	if (fd < 0 || (rsize = read(fd, buf, BUFFER_SIZE)) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	buf[rsize] = '\0';
-	if (rsize == 0 && backup == NULL)
+	if ((rsize = read(fd, buf, BUFFER_SIZE)) == 0 && !backup)
 		return (0);
-	if (rsize == 0)
+	if (rsize == 0 && backup)
 	{
-		//backup에서 한 줄 잘라서 반환
-		nullp = ft_strchr(backup, '\n');
-		nullp = nullp == NULL ? &backup[ft_strlen(backup)] : nullp;
-		*line = ft_substr(backup, 0, (size_t)(nullp - backup));
-		if (*nullp == '\0')
+		idx = ft_strchr(backup, '\n');
+		if (!idx)
+		{
+			*line = ft_strdup(backup);
 			free(backup);
+		}
 		else
 		{
-			nullp = ft_substr(nullp, 0, ft_strlen(backup) - (size_t)(nullp - backup));
+			*line = ft_substr(backup, 0, idx);
+			tmp = ft_strdup(backup + idx);
 			free(backup);
-			backup = nullp;
+			backup = tmp;
 		}
 	}
 	else
 	{
-		//buf에 개행문자 있으면 line 할당 후 backup + buf 저장, buf 개행문자 이후 잘라서 backup에 저장
-		if (nullp = ft_strchr(buf, '\n'))
-		{
-			*line = malloc(ft_strlen(backup) + (size_t)(nullp - buf));
-			ft_strlcpy(*line, backup, ft_strlen(backup));
-			ft_strlcpy(*(line + ft_strlen(backup)), buf, (size_t)(nullp - buf) + 1);
+		tmp = ft_strjoin(backup, buf);
+		if (backup)
 			free(backup);
-			backup = ft_substr(nullp, 0, (size_t)(&buf[rsize] - nullp));
-		}
-		//buf에 개행문자 없을 경우 backup에 이어붙이고 다시 read
+		backup = tmp;
+		idx = ft_strchr(backup, '\n');
+		if (!idx)
+			return (get_next_line(fd, line));
 		else
 		{
-			backup = ft_realloc(backup, ft_strlen(backup) + rsize + 1);
-			return (get_next_line(fd, line));
+			*line = ft_substr(backup, 0, idx + 1);
+			tmp = ft_substr(backup + idx, 0, ft_strlen(backup) - idx - 1);
+			free(backup);
+			backup = tmp;
 		}
 	}
 	return (1);

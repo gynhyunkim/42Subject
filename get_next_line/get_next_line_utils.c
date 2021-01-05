@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:37:53 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/03 17:54:15 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/05 16:53:50 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ size_t	ft_strlen(const char *s)
 	while (s[len])
 		len++;
 	return (len);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*cpystr;
+	int		i;
+
+	cpystr = (char *)malloc(ft_strlen(s1) + 1);
+	if (cpystr == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		cpystr[i] = s1[i];
+		i++;
+	}
+	cpystr[i] = '\0';
+	return (cpystr);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
@@ -39,20 +57,42 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-char	*ft_strchr(const char *s, int c)
+
+int		ft_strchr(const char *s, int c)
 {
 	int i;
 
 	i = 0;
 	if (c == 0)
-		return ((char *)&s[ft_strlen(s)]);
+		return (ft_strlen(s));
 	while (s[i])
 	{
 		if (s[i] == c)
-			return ((char *)&s[i]);
+			return (i);
 		i++;
 	}
-	return (NULL);
+	return (0);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	dlen;
+	size_t	len;
+	int		i;
+
+	dlen = ft_strlen(dst);
+	i = 0;
+	if (size <= dlen)
+		return (ft_strlen(src) + size);
+	len = ft_strlen(src) + dlen;
+	while (src[i] && i < (int)(size - dlen - 1))
+	{
+		dst[i + dlen] = src[i];
+		i++;
+	}
+	if (size > 0)
+		dst[i + dlen] = 0;
+	return (len);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -68,13 +108,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (result);
 }
 
-char	*ft_realloc(char *str, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *newalloc;
+	char *result;
 
-	if (!(newalloc = malloc(size)))
+	if (!(s1 && s2))
 		return (NULL);
-	ft_strlcpy(newalloc, str, ft_strlen(str) + 1);
-	free(str);
-	return (newalloc);
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
+	result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (result == NULL)
+		return (result);
+	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
+	ft_strlcat(result, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	return (result);
 }
