@@ -1,35 +1,29 @@
-  
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/25 16:49:23 by gkim             ###   ########.fr       */
+/*   Created: 2020/12/26 17:02:28 by gkim              #+#    #+#             */
+/*   Updated: 2020/12/26 18:10:41 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strnstr(const char *hay, const char *nee, size_t len)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t		n;
-    if (!*hay)
-        return (NULL);
-	if (!(n = ft_strlen(nee)))
-		return ((char *)hay);
-	while (len >= n && *hay)
+	t_list *last;
+
+	if (lst == NULL && new == NULL)
+		return ;
+	if (*lst == NULL)
 	{
-		if (!(ft_strncmp(hay, nee, n)))
-			return ((char *)hay);
-		hay++;
-		len--;
+		ft_lstadd_front(lst, new);
+		return ;
 	}
-	return (NULL);
-}
-int		main(void)
-{
-	char *test = ft_strnstr((void *)NULL,"123",2);
+	last = ft_lstlast(*lst);
+	last->next = new;
+	new->next = NULL;
 }

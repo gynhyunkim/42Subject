@@ -1,35 +1,22 @@
-  
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/25 16:49:23 by gkim             ###   ########.fr       */
+/*   Created: 2020/12/26 17:00:28 by gkim              #+#    #+#             */
+/*   Updated: 2020/12/26 17:50:36 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strnstr(const char *hay, const char *nee, size_t len)
+t_list	*ft_lstlast(t_list *lst)
 {
-	size_t		n;
-    if (!*hay)
-        return (NULL);
-	if (!(n = ft_strlen(nee)))
-		return ((char *)hay);
-	while (len >= n && *hay)
-	{
-		if (!(ft_strncmp(hay, nee, n)))
-			return ((char *)hay);
-		hay++;
-		len--;
-	}
-	return (NULL);
-}
-int		main(void)
-{
-	char *test = ft_strnstr((void *)NULL,"123",2);
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }
