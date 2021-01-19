@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/19 15:30:26 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/19 17:15:18 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ void	cut_line(char **line, char **tocut)
 	int		len;
 	char	*tmp;
 
+	tmp = NULL;
 	len = ft_strchr(*tocut, '\n');
 	printf("%d\n", len);
 	*line = ft_strdup(*tocut, len + 1);
 	printf("%ld", ft_strlen(*tocut));
-	tmp = ft_strdup(*tocut + len + 1, ft_strlen(*tocut) - len);
+	if (len < ft_strlen(*tocut) - 1)
+		tmp = ft_strdup(*tocut + len + 1, ft_strlen(*tocut) - len);
 	free(*tocut);
 	*tocut = tmp;
-	printf("%s", *tocut);
 }
 
 int	get_next_line(int fd, char **line)
@@ -37,10 +38,10 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	while(rsize = read(fd, buf, BUFFER_SIZE) > 0)
+	while((rsize = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		printf("%d\n", rsize);
-		buf[rsize] = '\0';
+		buf[BUFFER_SIZE] = '\0';
 		if (backup[fd] == NULL)
 			backup[fd] = ft_strdup("", 1);
 		tmp = ft_strjoin(backup[fd], buf);
@@ -52,5 +53,9 @@ int	get_next_line(int fd, char **line)
 			break;
 		}
 	}
+	if (backup[fd] == NULL)
+		return (0);
+	else
+		cut_line(line, &backup[fd]);	
 	return (1);	
 }

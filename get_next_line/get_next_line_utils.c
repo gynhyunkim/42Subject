@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:37:53 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/08 13:06:00 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/19 17:03:03 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strdup(const char *str, size_t n)
 
 	if (!(newstr = malloc(n)))
 		return (NULL);
+	i = 0;
 	while(str[i] && i < n - 1)
 	{
 		newstr[i] = str[i];
