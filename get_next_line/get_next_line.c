@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/20 20:20:06 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:31:16 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,26 @@ int	cut_line(char **line, char **backup, char *buf, char *cutp)
 {
 	char *tmp;
 
-	if (buf)
+	if (cutp)
 	{
-		free(buf);
-		buf = NULL;
+		*cutp = '\0';
+		if (!(*line = ft_strdup(*backup)) || *(tmp = ft_strdup(cutp + 1)))
+			return (-1);
+		free(*backup);
+		*backup = tmp;
 	}
-	*cutp = '\0';
-	if (!(*line = ft_strdup(*backup)))
-		return (-1);
-	if (!(tmp = ft_strdup(cutp + 1)))
-		return (-1);	
-	free(*backup);
-	backup = tmp;
-	return (1);
-}
-
-int	end_line(char **line, char **backup, char *buf)
-{
-	char *cutp;
-
-	if (buf)
+	if (!*backup)
 	{
-		free(buf);
-		buf = NULL;
-	}
-	if (*backup == NULL)
-	{
-		*line = ft_strdup("");
+		if (!(*line = ft_strdup("")))
+			return (-1);
 		return (0);
 	}
-	else
+	else 
 	{
-		if ((cutp = ft_strchr(*backup, '\n')))
-			return (cut_line(line, backup, buf, cutp));
-		else
-		{
-			if (!(*line = ft_strdup(*backup)))
-				return (-1);
-			free(*backup);
-			*backup = NULL;
-		}
-		return (1);	
+		*line = *backup;
+		*backup = NULL;
 	}
+	return (1);
 }
 
 int	get_next_line(int fd, char **line)
@@ -82,7 +60,7 @@ int	get_next_line(int fd, char **line)
 			free(backup[fd]);
 		backup[fd] = tmp;
 		if ((cutp = ft_strchr(backup[fd], '\n')))
-			return (cut_line(line, &backup[fd], buf, cutp));
+			break ;
 	}
 	return (cut_line(line, &backup[fd], buf, cutp));
 }
