@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/20 19:31:21 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:09:00 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,51 @@ int	cut_line(char **line, char **backup, char *buf, char *cutp)
 {
 	char *tmp;
 
+	tmp = NULL;
 	if (buf)
 	{
 		free(buf);
 		buf = NULL;
 	}
-	if (!*backup)
+	*cutp = '\0';
+	*line = ft_strdup(*backup);
+	if (cutp < *backup[ft_strlen(*backup)] - 1)
+	{
+		if (!(tmp = ft_strdup(cutp + 1)))
+			return (-1);
+	}
+	free(*backup);
+	backup = tmp;
+	return (1);
+}
+
+int	end_line(char **line, char **backup, char *buf)
+{
+	char *cutp;
+
+	if (buf)
+	{
+		free(buf);
+		buf = NULL;
+	}
+	if (*backup == NULL)
 	{
 		*line = ft_strdup("");
 		return (0);
 	}
-	if (cutp)
-	{
-		*cutp = '\0';
-		*line = ft_strdup(*backup);
-		tmp = ft_strdup(cutp);
-		free(*backup);
-		*backup = tmp;	
-	}
 	else
 	{
-		*line = ft_strdup(*backup);
-		free(*backup);
-		*backup = NULL;
+		if ((cutp = ft_strchr(*backup, '\n')))
+			return (cut_line(line, backup, buf, cutp));
+		else
+		{
+			if (!(*line = ft_strdup(*backup)))
+				return (-1);
+			free(*backup);
+			*backup = NULL;
+		}
+		return (1);	
 	}
-	return (1);
 }
 
 int	get_next_line(int fd, char **line)
@@ -50,7 +70,7 @@ int	get_next_line(int fd, char **line)
 	char		*buf;
 	char		*tmp;
 	char		*cutp;
-	static char *backup[FOPEN_MAX];
+	static char *backup[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
@@ -64,8 +84,8 @@ int	get_next_line(int fd, char **line)
 		if (backup[fd])
 			free(backup[fd]);
 		backup[fd] = tmp;
-		if (!(cutp = ft_strchr(backup[fd], '\n')))
-			break;
+		if ((cutp = ft_strchr(backup[fd], '\n')))
+			return (cut_line(line, &backup[fd], buf, cutp));
 	}
 	return (cut_line(line, &backup[fd], buf, cutp));
 }
