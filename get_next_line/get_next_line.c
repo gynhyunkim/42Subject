@@ -22,7 +22,6 @@ void	cut_line(char **line, char **tocut)
 	len = ft_strchr(*tocut, '\n');
 	printf("%d\n", len);
 	*line = ft_strdup(*tocut, len + 1);
-	printf("%ld", ft_strlen(*tocut));
 	if (len < ft_strlen(*tocut) - 1)
 		tmp = ft_strdup(*tocut + len + 1, ft_strlen(*tocut) - len);
 	free(*tocut);
