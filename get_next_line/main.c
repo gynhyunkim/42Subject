@@ -12,5 +12,7 @@ int main(int argc, char **argv)
         printf("%s\n", line);
         free(line);
     }
+    printf("%s\n", line);
+    free(line);
     return (0);
 }
