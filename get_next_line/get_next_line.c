@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/20 20:09:00 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:20:06 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ int	cut_line(char **line, char **backup, char *buf, char *cutp)
 {
 	char *tmp;
 
-	tmp = NULL;
 	if (buf)
 	{
 		free(buf);
 		buf = NULL;
 	}
 	*cutp = '\0';
-	*line = ft_strdup(*backup);
-	if (cutp < *backup[ft_strlen(*backup)] - 1)
-	{
-		if (!(tmp = ft_strdup(cutp + 1)))
-			return (-1);
-	}
+	if (!(*line = ft_strdup(*backup)))
+		return (-1);
+	if (!(tmp = ft_strdup(cutp + 1)))
+		return (-1);	
 	free(*backup);
 	backup = tmp;
 	return (1);

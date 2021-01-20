@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:37:53 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/20 19:56:39 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/20 20:19:11 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *str)
 	int 	i;
 	char	*newstr;
 
+	if (ft_strlen(str) == 0)
+		return (NULL);
 	if (!(newstr = malloc(ft_strlen(str) + 1)))
 		return (NULL);
 	i = 0;
@@ -99,8 +101,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 && s2)
 		return (ft_strdup(s2));
-	else if (!s1 && !s2)
-		return (NULL);
 	if(!(result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
 	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
