@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/21 23:40:27 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/22 00:27:02 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ char	*add_buf(char *save, char *buf)
 		buf = 0;
 	}
 	else
+	{
 		free(save);
+		save = 0;
+	}
 	return (tmp);
 }
 
@@ -39,11 +42,12 @@ int		cut_save(char **line, char **save, char *buf, char *cutp)
 	if (!(*line = ft_strdup(*save)) || !(tmp = ft_strdup(cutp + 1)))
 	{
 		free(*save);
-		*save = NULL;
+		*save = 0;
 		return (-1);
 	}
+	free(*save);
+	*save = tmp;
 	return (1);
-
 }
 
 int		get_line(char **line, char **save, char *buf)
@@ -56,7 +60,13 @@ int		get_line(char **line, char **save, char *buf)
 		return (cut_save(line, save, buf, tmp));
 	if (*save)
 	{
-		*line = *save;
+		if (!(*line = ft_strdup(*save)))
+		{
+			free(*save);
+			*save = 0;
+			return (-1);
+		}
+		free(*save);
 		*save = 0;
 	}
 	else
@@ -72,17 +82,23 @@ int		get_next_line(int fd, char **line)
 	static char	*save[OPEN_MAX];
 	char		*buf;
 	char		*cutp;
-	size_t		bytes;
+	ssize_t		bytes;
 
 	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0 ||
 	!(buf = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	while ((bytes = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
+		buf[bytes] = '\0';
 		if (!(save[fd] = add_buf(save[fd], buf)))
 			return (-1);
 		if ((cutp = ft_strchr(save[fd], '\n')))
 			return (cut_save(line, &save[fd], buf, cutp));
+	}
+	if (bytes < 0)
+	{
+		free(buf);
+		return (-1);
 	}
 	return (get_line(line, &save[fd], buf));
 }
