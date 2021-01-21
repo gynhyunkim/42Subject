@@ -20,7 +20,7 @@ int	cut_line(char **line, char **backup, char *buf, char *cutp)
 	if (cutp)
 	{
 		*cutp = '\0';
-		if (!(*line = ft_strdup(*backup)) || *(tmp = ft_strdup(cutp + 1)))
+		if (!(*line = ft_strdup(*backup)) || !(tmp = ft_strdup(cutp + 1)))
 			return (-1);
 		free(*backup);
 		*backup = tmp;
