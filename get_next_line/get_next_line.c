@@ -6,71 +6,83 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/21 19:51:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/21 23:40:27 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int	cut_backup(char **line, char **backup, char *cutptr)
+char	*add_buf(char *save, char *buf)
 {
-	char	*line;
-	char	*tmp;
+	char *tmp;
 
-	*cutptr = '\0';
-	if (!(line = ft_strdup(*backup)) || !(tmp = ft_strdup(cutptr + 1)))
+	if (!(tmp = ft_strjoin(save, buf)))
 	{
-		free(*backup);
-		*backup = NULL;
-		return (-1);
+		free(save);
+		save = 0;
+		free(buf);
+		buf = 0;
 	}
-	free(*backup);
-	*backup = tmp;
-	return (1);
+	else
+		free(save);
+	return (tmp);
 }
 
-int	get_line(char **line, char **backup, char *cutptr)
+int		cut_save(char **line, char **save, char *buf, char *cutp)
 {
-	if (cutptr)
-		return (cut_backup(line, backup, cutptr));
-	if (!*backup)
+	char	*tmp;
+
+	free(buf);
+	buf = 0;
+	*cutp = '\0';
+	if (!(*line = ft_strdup(*save)) || !(tmp = ft_strdup(cutp + 1)))
+	{
+		free(*save);
+		*save = NULL;
+		return (-1);
+	}
+	return (1);
+
+}
+
+int		get_line(char **line, char **save, char *buf)
+{
+	char *tmp;
+	
+	free(buf);
+	buf = 0;
+	if ((tmp = ft_strchr(*save, '\n')))
+		return (cut_save(line, save, buf, tmp));
+	if (*save)
+	{
+		*line = *save;
+		*save = 0;
+	}
+	else
 	{
 		if (!(*line = ft_strdup("")))
 			return (-1);
 	}
-	else
-	{
-		*line = *backup;
-		*backup = NULL;
-	}
 	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-	size_t		rsize;
+	static char	*save[OPEN_MAX];
 	char		*buf;
-	char		*tmp;
-	static char *backup[OPEN_MAX];
+	char		*cutp;
+	size_t		bytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0 ||
+	!(buf = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
-		return (-1);
-	while(!(tmp = ft_strchr(backup[fd], '\n')) &&
-	(rsize = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((bytes = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		buf[rsize] = '\0';
-		if (!(tmp = ft_strjoin(backup[fd], buf)))
+		if (!(save[fd] = add_buf(save[fd], buf)))
 			return (-1);
-		if (backup[fd])
-			free(backup[fd]);
-		backup[fd] = tmp;
+		if ((cutp = ft_strchr(save[fd], '\n')))
+			return (cut_save(line, &save[fd], buf, cutp));
 	}
-	free(buf);
-	buf = 0;
-	if (rsize < 0)
-		return (-1);
-	return (get_line(line, &backup[fd], tmp));
+	return (get_line(line, &save[fd], buf));
 }
