@@ -12,5 +12,8 @@ int main(int argc, char **argv)
         printf("%s\n", line);
         free(line);
     }
+    printf("%s\n", line);
+    free(line);
+    system("leaks 파일명 > error.txt");
     return (0);
 }
