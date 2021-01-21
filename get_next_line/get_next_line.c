@@ -6,40 +6,40 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/21 18:27:41 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/21 19:51:45 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int	cut_line(char **line, char **backup, char *cutp)
+int	cut_backup(char **line, char **backup, char *cutptr)
 {
-	char *tmp;
+	char	*line;
+	char	*tmp;
 
-	if (cutp)
+	*cutptr = '\0';
+	if (!(line = ft_strdup(*backup)) || !(tmp = ft_strdup(cutptr + 1)))
 	{
-		*cutp = '\0';
-		if (!(*line = ft_strdup(*backup)))
-			return (-1);
-		if (ft_strlen(cutp + 1) == 0)
-			tmp = NULL;
-		else
-		{
-			if (!(tmp = ft_strdup(cutp + 1)))
-				return (-1);
-		}
-		
 		free(*backup);
-		*backup = tmp;
-		return (1);
+		*backup = NULL;
+		return (-1);
 	}
+	free(*backup);
+	*backup = tmp;
+	return (1);
+}
+
+int	get_line(char **line, char **backup, char *cutptr)
+{
+	if (cutptr)
+		return (cut_backup(line, backup, cutptr));
 	if (!*backup)
 	{
 		if (!(*line = ft_strdup("")))
 			return (-1);
 	}
-	else 
+	else
 	{
 		*line = *backup;
 		*backup = NULL;
@@ -52,15 +52,13 @@ int	get_next_line(int fd, char **line)
 	size_t		rsize;
 	char		*buf;
 	char		*tmp;
-	char		*cutp;
 	static char *backup[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
 	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	cutp = NULL;
-	while(!(cutp = ft_strchr(backup[fd], '\n')) &&
+	while(!(tmp = ft_strchr(backup[fd], '\n')) &&
 	(rsize = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[rsize] = '\0';
@@ -71,7 +69,8 @@ int	get_next_line(int fd, char **line)
 		backup[fd] = tmp;
 	}
 	free(buf);
+	buf = 0;
 	if (rsize < 0)
 		return (-1);
-	return (cut_line(line, &backup[fd], cutp));
+	return (get_line(line, &backup[fd], tmp));
 }
