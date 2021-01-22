@@ -6,11 +6,11 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/22 23:26:28 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/22 23:26:15 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*add_buf(char *save, char *buf)
 {

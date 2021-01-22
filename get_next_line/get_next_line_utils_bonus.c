@@ -6,11 +6,11 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:37:53 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/22 23:14:04 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/22 23:26:42 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
