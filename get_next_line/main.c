@@ -3,17 +3,11 @@
 
 int main(int argc, char **argv)
 {
-    int fd1;
-    char *line;
+    int i = 2;
+    int j = 2;
 
-    fd1 = open(argv[1], O_RDONLY);
-    while (get_next_line(fd1, &line) > 0)
+    if (!(i = 0) || !(j = 0))
     {
-        printf("%s\n", line);
-        free(line);
+        printf("%d %d\n", i, j);
     }
-    printf("%s\n", line);
-    free(line);
-    system("leaks 파일명 > error.txt");
-    return (0);
 }

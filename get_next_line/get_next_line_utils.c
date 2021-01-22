@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:37:53 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/21 19:43:32 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/22 22:39:37 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*ft_strdup(const char *str)
 {
-	int	i;
-	char			*newstr;
+	size_t	i;
+	char	*newstr;
 
 	if (!(newstr = malloc(ft_strlen(str) + 1)))
 		return (NULL);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		newstr[i] = str[i];
 		i++;
@@ -45,63 +45,28 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	dlen;
-	size_t	len;
-	int		i;
-
-	dlen = ft_strlen(dst);
-	i = 0;
-	if (size <= dlen)
-		return (ft_strlen(src) + size);
-	len = ft_strlen(src) + dlen;
-	while (src[i] && i < (int)(size - dlen - 1))
-	{
-		dst[i + dlen] = src[i];
-		i++;
-	}
-	if (size > 0)
-		dst[i + dlen] = 0;
-	return (len);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	int	i;
-
-	i = 0;
-	if (src == NULL)
-		return (0);
-	while (i < (int)(size - 1) && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	if (size > 0)
-		dst[i] = 0;
-	return (ft_strlen(src));
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *result;
+	char 	*result;
+	size_t	s1_len;
+	size_t	s2_len;
 
 	if (!s1)
 		return (ft_strdup(s2));
-	if(!(result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+	if (!(result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (NULL);
-	ft_strlcpy(result, s1, ft_strlen(s1) + 1);
-	ft_strlcat(result, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	s1_len = 0;
+	s2_len = 0;
+	while (s1[s1_len])
+	{
+		result[s1_len] = s1[s1_len];
+		s1_len++;
+	}
+	while (s2[s2_len])
+	{
+		result[s1_len + s2_len] = s2[s2_len];
+		s2_len++;
+	}
+	result[s2_len] = '\0';
 	return (result);
 }
