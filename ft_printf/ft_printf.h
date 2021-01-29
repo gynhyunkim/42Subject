@@ -5,11 +5,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+typedef char	t_bool;
+# define TRUE 1
+# define FALSE 0
+
 typedef struct	s_flags {
-	char		zero;
-	char		minus;
-	char		wildcard;
-	char		dot;
+	t_bool		zero;
+	t_bool		minus;
+	int			wildcard;
+	int			precision;
 }				t_flags;
 
 int				ft_printf(const char *format, ...);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 14:31:17 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/26 21:57:14 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/23 17:22:22 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char			*ft_itoa(int n)
 	if (!(result = (char *)malloc(digit + 1)))
 		return (NULL);
 	result = (char *)ft_memset(result, 1, digit);
-	result[digit] = '\0';
+	result[digit] = 0;
 	if (n < 0)
 	{
 		num = (unsigned int)(n * -1);

@@ -1,4 +1,3 @@
-  
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,19 +12,18 @@
 
 #include "libft.h"
 
-char			*ft_strnstr(const char *hay, const char *nee, size_t len)
+char		*ft_strnstr(const char *haystack, const char *niddle, size_t len)
 {
-	size_t		n;
-    if (!*hay)
-        return (NULL);
-	if (!(n = ft_strlen(nee)))
-		return ((char *)hay);
-	while (len >= n && *hay)
+	if (ft_strlen(niddle) == 0)
+		return ((char *)haystack);
+	while (len-- && *haystack)
 	{
-		if (!(ft_strncmp(hay, nee, n)))
-			return ((char *)hay);
-		hay++;
-		len--;
+		if (*haystack == niddle[0] && len + 1 >= ft_strlen(niddle))
+		{
+			if (ft_memcmp(haystack, niddle, ft_strlen(niddle)) == 0)
+				return ((char *)haystack);
+		}
+		haystack++;
 	}
 	return (NULL);
 }
