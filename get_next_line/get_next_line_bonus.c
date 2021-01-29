@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
-/*   Updated: 2021/01/22 23:26:15 by gkim             ###   ########.fr       */
+/*   Updated: 2021/01/23 12:45:48 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ char	*add_buf(char *save, char *buf)
 	if (!(tmp = ft_strjoin(save, buf)))
 	{
 		free(save);
-		save = 0;
 		free(buf);
-		buf = 0;
 	}
 	else
-	{
 		free(save);
-		save = 0;
-	}
 	return (tmp);
 }
 
@@ -36,7 +31,6 @@ int		cut_save(char **line, char **save, char *buf, char *cutp)
 	char	*tmp;
 
 	free(buf);
-	buf = 0;
 	*cutp = '\0';
 	if (!(*line = ft_strdup(*save)) ||
 			!(tmp = ft_strdup(cutp + 1)))
@@ -60,13 +54,7 @@ int		get_line(char **line, char **save, char *buf)
 		return (cut_save(line, save, buf, tmp));
 	if (*save)
 	{
-		if (!(*line = ft_strdup(*save)))
-		{
-			free(*save);
-			*save = 0;
-			return (-1);
-		}
-		free(*save);
+		*line = *save;
 		*save = 0;
 	}
 	else

@@ -6,7 +6,11 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 19:39:59 by gkim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/29 15:56:44 by gkim             ###   ########.fr       */
+=======
+/*   Updated: 2021/01/23 12:47:15 by gkim             ###   ########.fr       */
+>>>>>>> 8f5c2d6c12830bc13b21728be900a0d03b90df99
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +26,11 @@ char	*add_buf(char *save, char *buf)
 		free(buf);
 	}
 	else
-	{
 		free(save);
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> 8f5c2d6c12830bc13b21728be900a0d03b90df99
 	return (tmp);
 }
 
@@ -56,13 +62,7 @@ int		get_line(char **line, char **save, char *buf)
 		return (cut_save(line, save, buf, tmp));
 	if (*save)
 	{
-		if (!(*line = ft_strdup(*save)))
-		{
-			free(*save);
-			*save = 0;
-			return (-1);
-		}
-		free(*save);
+		*line = *save;
 		*save = 0;
 	}
 	else
