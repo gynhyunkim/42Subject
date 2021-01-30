@@ -10,7 +10,7 @@ typedef struct	s_flags {
 	char		minus;
 	char		wildcard;
 	char		dot;
-}				t_flags;
+}				t_flags; //init함수 필요
 
 int				ft_printf(const char *format, ...);
 
