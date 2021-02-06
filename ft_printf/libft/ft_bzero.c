@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:51:22 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:17 by gkim             ###   ########.fr       */
+/*   Updated: 2020/12/27 13:09:10 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
-
-	i = 0;
-	while (i < n)
+	while (n--)
 	{
-		*((unsigned char *)s + i) = 0;
-		i++;
+		*((unsigned char *)s) = 0;
+		s = s + 1;
 	}
 }
