@@ -6,14 +6,14 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:16:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/06 22:24:17 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 00:57:51 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-void	*init_flags(t_flags **flags)
+void	init_flags(t_flags **flags)
 {
 	(*flags) -> zero = FALSE;
 	(*flags) -> minus = FALSE;
@@ -69,3 +69,4 @@ void	parse_flags(const char **format, va_list ap, t_flags **flg)
 		(*format)++;
 	}
 }
+

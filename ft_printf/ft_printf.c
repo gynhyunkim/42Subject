@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 00:07:11 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 01:00:39 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		print_string(va_list ap, t_flags *flags)
 	cnt = 0;
 	i = 0;
 	str = va_arg(ap, char *);
-	len = flags -> prec > -1 && flags -> prec < ft_strlen(str) ? flags -> prec : ft_strlen(str);
+	len = flags -> prec > -1 && flags -> prec < (int)ft_strlen(str) ? flags -> prec : ft_strlen(str);
 	if (!flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
 	while (str[i])
@@ -58,8 +58,8 @@ int		print_char(va_list ap, t_flags *flags)
 {
 	int		c;
 	int		cnt;
-	int		padding;
 
+	cnt = 0;
 	c = va_arg(ap, int);
 	if (flags-> minus)
 		ft_putchar_fd(c, 1);
@@ -77,7 +77,7 @@ int		print_num(va_list ap, t_flags *flags)
 
 	cnt = 0;
 	num = ft_itoa(va_arg(ap, int));
-	len = flags -> prec <= ft_strlen(num) ? ft_strlen(num) : flags -> prec;
+	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num) : flags -> prec;
 	if (!flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
 	cnt += print_padding(len - ft_strlen(num), TRUE);
@@ -100,12 +100,12 @@ int		print(va_list ap, t_flags *flags)
 		return (print_string(ap, flags));
 	else if (type == 'd' || type == 'i')
 		return (print_num(ap, flags));	
+	return (0);
 }
 
 int		ft_printf(const char *format, ...) //%와 flags체크 후 포맷에 따라 함수 호출
 {
 	va_list ap;
-	char 	test;
 	t_flags	*flags;
 	int		cnt;
 
