@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flagparsing.c                                      :+:      :+:    :+:   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:16:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 19:25:01 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 20:27:08 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	set_width(const char **format, va_list ap, t_flags *flg)
 	if (**format == '*')
 	{
 		flg -> width = va_arg(ap, int);
+		if (flg -> width < 0)
+		{
+			flg -> minus = TRUE;
+			flg -> width *= -1;
+		}
 	}
 	else
 	{
@@ -60,16 +65,16 @@ void	parse_flags(const char **format, va_list ap, t_flags **flg)
 	{
 		if (**format == '-')
 			(*flg) -> minus = TRUE;
-		else if (**format == '0' && !(*flg) -> minus)
+		else if (**format == '0')
 			(*flg) -> zero = TRUE;
 		else if (**format == '.')
 			set_prec(format, *flg);
-		else if ((**format != '0' && ft_isdigit(**format)) || **format == '*')
+		else if (ft_isdigit(**format) || **format == '*')
 			set_width(format, ap, *flg);
 		(*format)++;
 	}
-	(*flg) -> type = **format;
-	if ((*flg) -> type != 'd' && (*flg) -> minus && (*flg) -> zero)
+	if ((*flg) -> zero && (*flg) -> minus)
 		(*flg) -> zero = FALSE;
+	(*flg) -> type = **format;
 }
 

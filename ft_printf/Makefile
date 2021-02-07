@@ -2,10 +2,17 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 AFLAGS = rcs
 NAME = libftprintf.a
-SRCS =	flagparsing.c \
-		ft_printf.c \
-		ft_u_itoa.c \
-OBJS = %(SRCS:.c=.o)
+SRCS =	ft_printf.c\
+		ft_tohex.c\
+		ft_u_itoa.c\
+		parse_flags.c\
+		print_char.c\
+		print_memory.c\
+		print_num.c\
+		print_padding.c\
+		print_string.c\
+
+OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
 	$(MAKE) all -C ./libft

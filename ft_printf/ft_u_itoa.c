@@ -7,8 +7,6 @@ static size_t	chk_u_digit(unsigned int n)
 	digit = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-		digit++;
 	while (n)
 	{
 		n = n / 10;
