@@ -15,7 +15,7 @@ int main(void)
 	printf("[%*.*d]\n", 5, -3, 12);
 	printf("[%-13.0d]\n", 12);
 	printf("[%-*.*d]\n", 4, -3, -12);
-	ft_printf("[%-*.*d]\n", 4, -3, -12);
+	ft_printf("[%-4d]\n", -12);
 	// ft_printf("[%x]\n", 4294967285);
 	// printf("[%15x]\n", 123456);
 	// printf("[%15X]\n", 123456);
