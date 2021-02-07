@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:25:37 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/08 00:20:56 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		print(va_list ap, t_flags *flags)
 		return (print_num(ap, flags));
 	else if (type == 'p')
 		return (print_memory(ap, flags));
-	return (0);
+	return (-1);
 }
 
 int		ft_printf(const char *format, ...) //%와 flags체크 후 포맷에 따라 함수 호출
