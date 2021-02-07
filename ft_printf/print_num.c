@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 21:54:59 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 22:03:01 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ int			print_num(va_list ap, t_flags *flags)
 	int		cnt;
 	int		len;
 	char	*num;
+	char	*tofree;
 
 	cnt = 0;
 	num = get_arg(ap, flags);
+	tofree = num;
+	if (*num == '-')
+	{
+		ft_putchar_fd('-', 1);
+		num++;
+	}
 	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num) : flags -> prec;
 	if (flags -> prec == 0 && *num == '0')
 		len = 0;
@@ -48,6 +55,6 @@ int			print_num(va_list ap, t_flags *flags)
 	}
 	if (flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
-	free(num);
+	free(tofree);
 	return (cnt);
 }

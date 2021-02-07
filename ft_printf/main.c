@@ -9,7 +9,7 @@ int main(void)
 
 	// printf("--------printf--------\n");
 	// printf("%0c\n", 3, 'h');
-	ft_printf("[%x]\n", 4294967285);
+	ft_printf("[%.*d]\n", 3, -12);
 	// ft_printf("[%x]\n", 4294967285);
 	// printf("[%15x]\n", 123456);
 	// printf("[%15X]\n", 123456);
