@@ -9,9 +9,8 @@ int main(void)
 
 	// printf("--------printf--------\n");
 	// printf("%0c\n", 3, 'h');
-	printf("[%-03d]\n", 1);
-	ft_printf("[%.d]\n", 0);
-	ft_printf("[%1.d]\n", 0);
+	ft_printf("[%x]\n", 4294967285);
+	// ft_printf("[%x]\n", 4294967285);
 	// printf("[%15x]\n", 123456);
 	// printf("[%15X]\n", 123456);
 	// printf("[%-15x]\n", 123456);

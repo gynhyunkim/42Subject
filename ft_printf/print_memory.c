@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:25:15 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:25:36 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:32:26 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int		print_memory(va_list ap, t_flags *flags)
 {
-	int			cnt;
-	long long	mem;
-	char		*hex;
+	int					cnt;
+	char				*hex;
+	unsigned long long	mem;
 
 	cnt = 2;
-	mem = va_arg(ap, long long);
+	mem = va_arg(ap, unsigned long long);
 	hex = ft_tohex(mem, "0123456789abcdef");
 	cnt += ft_strlen(hex);
 	if (!flags -> minus && !flags -> zero)

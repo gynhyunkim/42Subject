@@ -6,58 +6,42 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:23:52 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:25:02 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:39:44 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_u_tohex(unsigned int n, char *set)
+static size_t	check_len(unsigned long long n)
 {
-	int				len;
-	unsigned int	temp;
-	char			*hex;
+	size_t len;
 
-	len = n == 0 ? 1 : 0;
-	temp = n;
-	while (temp)
-	{
-		temp = temp / 16;
-		len++;
-	}
-	hex = (char *)malloc(len + 1);
-	hex[len--] = '\0';
-	if (n == 0)
-		hex[len] = '0';
+	len = 0;
 	while (n)
 	{
-		hex[len--] = set[n % 16];
 		n = n / 16;
+		len++;
 	}
-	return (hex);
+	return (len);
 }
 
-char	*ft_tohex(long long n, char *set)
+char			*ft_tohex(unsigned long long n, char *set)
 {
-	int		len;
-	long long temp;
+	size_t	len;
 	char	*hex;
 
-	len = n == 0 ? 1 : 0;
-	temp = n;
-	while (temp)
-	{
-		temp = temp / 16;
-		len++;
-	}
+	if (n == 0)
+		return (ft_strdup("0"));
+	len = check_len(n);
 	hex = (char *)malloc(len + 1);
 	hex[len--] = '\0';
 	if (n == 0)
 		hex[len] = '0';
 	while (n)
 	{
-		hex[len--] = set[n % 16];
+		hex[len--] = set[(int)(n % 16)];
 		n = n / 16;
 	}
+	printf("%s\n", hex);
 	return (hex);
 }

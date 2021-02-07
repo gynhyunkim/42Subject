@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static size_t	chk_u_digit(unsigned int n)
+static size_t	chk_u_digit(unsigned long n)
 {
 	size_t	digit;
 
@@ -15,11 +15,11 @@ static size_t	chk_u_digit(unsigned int n)
 	return (digit);
 }
 
-static char		*ft_u_convert(unsigned int n, char *num)
+static char		*ft_u_convert(unsigned long n, char *num)
 {
-	int i;
+	unsigned int	i;
 
-	i = (int)ft_strlen(num) - 1;
+	i = ft_strlen(num) - 1;
 	if (!n)
 		num[i] = '0';
 	while (n)
@@ -31,7 +31,7 @@ static char		*ft_u_convert(unsigned int n, char *num)
 	return (num);
 }
 
-char			*ft_u_itoa(unsigned int n)
+char			*ft_u_itoa(unsigned long n)
 {
 	char			*result;
 	size_t			digit;

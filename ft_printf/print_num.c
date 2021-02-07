@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:38:14 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 21:54:59 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ static char	*get_arg(va_list ap, t_flags *flags)
 	else if (flags -> type == 'u')
 		return (ft_u_itoa(va_arg(ap, unsigned int)));
 	else if (flags -> type == 'x')
-		return (ft_u_tohex(va_arg(ap, unsigned int), "0123456789abcde"));
+	{
+		return (ft_tohex(va_arg(ap, unsigned int), "0123456789abcdef"));
+	}
 	else if (flags -> type == 'X')
-		return (ft_u_tohex(va_arg(ap, unsigned int), "0123456789ABCDE"));
-	return ((void *)NULL);
+		return (ft_tohex(va_arg(ap, unsigned int), "0123456789ABCDEF"));
+	return (NULL);
 }
 
 int			print_num(va_list ap, t_flags *flags)

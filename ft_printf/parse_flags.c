@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:16:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:27:08 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 20:57:52 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,17 @@ void	init_flags(t_flags **flags)
 	(*flags) -> prec = -1;
 }
 
-void	set_prec(const char **format, t_flags *flg)
+void	set_prec(const char **format, va_list ap, t_flags *flg)
 {
 	(*format)++;
 	flg -> prec = 0;
+	if (**format == '*')
+	{
+		flg -> prec = va_arg(ap, int);
+		if (flg -> prec < 0)
+			flg -> prec = -1;
+		(*format)++;
+	}
 	while (ft_isdigit(**format))
 	{
 		flg -> prec = (flg -> prec * 10) + (**format - '0');
@@ -68,7 +75,7 @@ void	parse_flags(const char **format, va_list ap, t_flags **flg)
 		else if (**format == '0')
 			(*flg) -> zero = TRUE;
 		else if (**format == '.')
-			set_prec(format, *flg);
+			set_prec(format, ap, *flg);
 		else if (ft_isdigit(**format) || **format == '*')
 			set_width(format, ap, *flg);
 		(*format)++;
