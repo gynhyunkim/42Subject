@@ -4,17 +4,13 @@ AFLAGS = rcs
 NAME = libftprintf.a
 SRCS =	flagparsing.c \
 		ft_printf.c \
-
-OBJS = $(SRCS:.c=.o)
-
+		ft_u_itoa.c \
+OBJS = %(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(MAKE) -C ./libft
+	$(MAKE) all -C ./libft
 	cp libft/libft.a $(NAME)
 	$(AR) $(AFLAGS) $@ $^
-
-%.o : %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
 
 all : $(NAME)
 
@@ -24,7 +20,7 @@ clean :
 
 fclean : clean
 	$(MAKE) fclean -C ./libft
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
 
