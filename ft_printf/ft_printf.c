@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 01:00:39 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 19:21:39 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int		print_string(va_list ap, t_flags *flags)
 	cnt = 0;
 	i = 0;
 	str = va_arg(ap, char *);
-	len = flags -> prec > -1 && flags -> prec < (int)ft_strlen(str) ? flags -> prec : ft_strlen(str);
+	len = flags -> prec > -1 && flags -> prec < (int)ft_strlen(str) ? flags -> prec : (int)ft_strlen(str);
 	if (!flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
 	while (str[i])
 	{
-		if (flags -> prec > -1 && i >= flags -> prec)
+		if (i >= flags -> prec)
 			break;
 		ft_putchar_fd(str[i], 1);
 		cnt++;
@@ -69,6 +69,56 @@ int		print_char(va_list ap, t_flags *flags)
 	return (cnt);
 }
 
+char	*ft_tohex(long long n, char *set)
+{
+	int		len;
+	long long temp;
+	char	*hex;
+
+	len = n == 0 ? 1 : 0;
+	temp = n;
+	while (temp)
+	{
+		temp = temp / 16;
+		len++;
+	}
+	hex = (char *)malloc(len + 1);
+	hex[len--] = '\0';
+	if (n == 0)
+		hex[len] = '0';
+	while (n)
+	{
+		hex[len--] = set[n % 16];
+		n = n / 16;
+	}
+	return (hex);
+}
+
+char	*ft_u_tohex(unsigned int n, char *set)
+{
+	int				len;
+	unsigned int	temp;
+	char			*hex;
+
+	len = n == 0 ? 1 : 0;
+	temp = n;
+	while (temp)
+	{
+		temp = temp / 16;
+		len++;
+	}
+	hex = (char *)malloc(len + 1);
+	hex[len--] = '\0';
+	if (n == 0)
+		hex[len] = '0';
+	while (n)
+	{
+		hex[len--] = set[n % 16];
+		n = n / 16;
+	}
+	return (hex);
+}
+
 int		print_num(va_list ap, t_flags *flags)
 {
 	int		cnt;
@@ -76,18 +126,47 @@ int		print_num(va_list ap, t_flags *flags)
 	char	*num;
 
 	cnt = 0;
-	num = ft_itoa(va_arg(ap, int));
+	if (flags -> type == 'd' || flags -> type == 'i')
+		num = ft_itoa(va_arg(ap, int));
+	else if (flags -> type == 'u')
+		num = ft_u_itoa(va_arg(ap, unsigned int));
+	else if (flags -> type == 'x')
+		num = ft_u_tohex(va_arg(ap, unsigned int), "0123456789abcde");
+	else if (flags -> type == 'X')
+		num = ft_u_tohex(va_arg(ap, unsigned int), "0123456789ABCDE");
 	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num) : flags -> prec;
 	if (!flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+		cnt += print_padding(flags -> width - len, flags -> zero);
 	cnt += print_padding(len - ft_strlen(num), TRUE);
 	ft_putstr_fd(num, 1);
 	cnt += ft_strlen(num);
 	if (flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+		cnt += print_padding(flags -> width - len, flags -> zero);
+	free(num);
 	return (cnt);
 }
 
+int		print_memory(va_list ap, t_flags *flags)
+{
+	int			cnt;
+	long long	mem;
+	char		*hex;
+
+	cnt = 2;
+	mem = va_arg(ap, long long);
+	hex = ft_tohex(mem, "0123456789abcdef");
+	cnt += ft_strlen(hex);
+	if (!flags -> minus && !flags -> zero)
+		cnt += print_padding(flags -> width - cnt, FALSE);
+	ft_putstr_fd("0x", 1);
+	if (flags -> zero)
+		cnt += print_padding(flags -> width - cnt, TRUE);
+	ft_putstr_fd(hex, 1);
+	if (flags -> minus)
+		cnt += print_padding(flags -> width - cnt, FALSE);
+	free(hex);
+	return (cnt);
+}
 
 int		print(va_list ap, t_flags *flags)
 {
@@ -98,8 +177,10 @@ int		print(va_list ap, t_flags *flags)
 		return (print_char(ap, flags));
 	else if (type == 's')
 		return (print_string(ap, flags));
-	else if (type == 'd' || type == 'i')
-		return (print_num(ap, flags));	
+	else if (type == 'd' || type == 'i' || type == 'u' || type == 'x' || type == 'X')
+		return (print_num(ap, flags));
+	else if (type == 'p')
+		return (print_memory(ap, flags));
 	return (0);
 }
 
@@ -118,11 +199,13 @@ int		ft_printf(const char *format, ...) //%와 flags체크 후 포맷에 따라 
 		{
 			++format;
 			parse_flags(&format, ap, &flags);
-			flags -> type = *format;
 			cnt += print(ap, flags);
 		}
 		else
+		{
 			write(1, format, 1);
+			cnt++;
+		}
 		format++;
 	}
 	va_end(ap);

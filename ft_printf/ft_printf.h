@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:48 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 00:57:09 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/07 19:02:50 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ typedef struct	s_flags {
 
 int				ft_printf(const char *format, ...);
 void			parse_flags(const char **format, va_list ap, t_flags **flg);
+int		print_memory(va_list ap, t_flags *flags);
+char			*ft_u_itoa(unsigned int n);
 
 #endif
