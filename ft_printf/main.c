@@ -9,7 +9,12 @@ int main(void)
 
 	// printf("--------printf--------\n");
 	// printf("%0c\n", 3, 'h');
-	printf("[%0*d]\n", 4, -12);
+	printf("[%-*.*i]\n", -2, 1, 8);
+	ft_printf("[%-*.*i]\n", -2, 1, 8);
+	printf("[%-*.*d]\n", -2, 1, 8);
+	ft_printf("[%-*.*d]\n", -2, 1, 8);
+	printf("[%-4.2d]\n", 8);
+	ft_printf("[%-4.2d]\n", 8);
 	printf("[%*.*s]\n", 10, -3, "hello");
 	printf("[%*.*i]\n", 4, 3, 12);
 	printf("[%*.*d]\n", 5, -3, 12);

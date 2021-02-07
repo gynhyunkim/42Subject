@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/08 00:34:07 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/08 00:39:13 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			print_negative(char *num, t_flags *flags)
 	int	len;
 	int cnt;
 
-	cnt = 1;
+	cnt = ft_strlen(num);
 	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num)  : flags -> prec;
 	if (!flags -> minus && !flags -> zero)
 		cnt += print_padding(flags -> width - len, FALSE);
@@ -40,7 +40,7 @@ int			print_negative(char *num, t_flags *flags)
 	num++;
 	if (!flags -> minus && flags -> zero)
 		cnt += print_padding(flags -> width - len, TRUE);
-	cnt += print_padding(len - ft_strlen(num) - 1, TRUE);
+	cnt += print_padding(flags -> prec - ft_strlen(num), TRUE);
 	ft_putstr_fd(num, 1);
 	if (flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
