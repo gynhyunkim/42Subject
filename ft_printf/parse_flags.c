@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-void	init_flags(t_flags **flags)
+static void	init_flags(t_flags **flags)
 {
 	(*flags)->zero = FALSE;
 	(*flags)->minus = FALSE;
@@ -21,7 +20,7 @@ void	init_flags(t_flags **flags)
 	(*flags)->prec = -1;
 }
 
-void	set_prec(const char **format, va_list ap, t_flags *flg)
+static void	set_prec(const char **format, va_list ap, t_flags *flg)
 {
 	(*format)++;
 	flg->prec = 0;
@@ -40,7 +39,7 @@ void	set_prec(const char **format, va_list ap, t_flags *flg)
 	(*format)--;
 }
 
-void	set_width(const char **format, va_list ap, t_flags *flg)
+static void	set_width(const char **format, va_list ap, t_flags *flg)
 {
 	flg->width = 0;
 	if (**format == '*')
@@ -66,7 +65,7 @@ void	set_width(const char **format, va_list ap, t_flags *flg)
 void	parse_flags(const char **format, va_list ap, t_flags **flg)
 {
 	init_flags(flg);
-	while (!ft_isalpha(**format))
+	while (!ft_isalpha(**format) && **format)
 	{
 		if (**format == '%')
 		{

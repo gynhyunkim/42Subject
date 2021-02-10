@@ -21,8 +21,10 @@ int		print_string(va_list ap, t_flags *flags)
 
 	i = 0;
 	str = va_arg(ap, char *);
-	if (!str)
+	if (!str && flags -> prec == -1)
 		str = "(null)";
+	else if (!str && flags -> prec > -1)
+		str = "";
 	cnt = ft_strlen(str);
 	len = flags->prec > -1 && flags->prec < cnt ? flags->prec : cnt;
 	cnt = len;

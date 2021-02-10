@@ -27,7 +27,7 @@ static char	*get_arg(va_list ap, t_flags *flags)
 	return (NULL);
 }
 
-int			print_positive(char *num, t_flags *flags)
+static int	print_positive(char *num, t_flags *flags)
 {
 	int len;
 	int cnt;
@@ -43,7 +43,7 @@ int			print_positive(char *num, t_flags *flags)
 	return (cnt);
 }
 
-int			print_negative(char *num, t_flags *flags)
+static int	print_negative(char *num, t_flags *flags)
 {
 	int	len;
 	int	cnt;
