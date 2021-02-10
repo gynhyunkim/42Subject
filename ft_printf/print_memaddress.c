@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:25:15 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 13:37:38 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 20:18:05 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int		print_memaddress(va_list ap, t_flags *flags)
 
 	cnt = 2;
 	mem = va_arg(ap, unsigned long long);
-	add = ft_uitoa_base(mem, "0123456789abcdef");
+	if (mem == 0 && flags -> prec == 0)
+		add = ft_strdup("");
+	else
+		add = ft_uitoa_base(mem, "0123456789abcdef");
 	cnt += ft_strlen(add);
 	if (!flags -> minus && !flags -> zero)
 		cnt += print_padding(flags -> width - cnt, FALSE);

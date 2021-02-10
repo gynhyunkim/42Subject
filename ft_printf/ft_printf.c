@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 15:26:56 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 20:46:02 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@ int		print(va_list ap, t_flags *flags)
 {
 	int type;
 
-	type = flags -> type;
+	type = flags->type;
 	if (type == 'c')
 		return (print_char(ap, flags));
 	else if (type == 's')
 		return (print_string(ap, flags));
-	else if (type == 'd' || type == 'i' || type == 'u' || type == 'x' || type == 'X')
+	else if (type == 'd' || type == 'i' || type == 'u'
+			|| type == 'x' || type == 'X')
 		return (print_num(ap, flags));
 	else if (type == 'p')
 		return (print_memaddress(ap, flags));
 	else if (type == '%')
-	{
-		ft_putchar_fd('%', 1);
-		return (1);
-	}
+		return (print_char(ap, flags));
 	return (-1);
 }
 
-int		ft_printf(const char *format, ...) //%와 flags체크 후 포맷에 따라 함수 호출
+int		ft_printf(const char *format, ...)
 {
 	va_list ap;
 	t_flags	*flags;
