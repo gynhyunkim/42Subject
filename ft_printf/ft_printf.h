@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:48 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 21:35:04 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 13:37:10 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ typedef struct	s_flags {
 
 int				ft_printf(const char *format, ...);
 void			parse_flags(const char **format, va_list ap, t_flags **flg);
-int				print_memory(va_list ap, t_flags *flags);
+int				print_memaddress(va_list ap, t_flags *flags);
 char			*ft_u_itoa(unsigned long n);
 int				print_string(va_list ap, t_flags *flags);
 int				print_padding(int n, t_bool zero);
 int				print_char(va_list ap, t_flags *flags);
 int				print_num(va_list ap, t_flags *flags);
-char			*ft_tohex(unsigned long long n, char *set);
+char			*ft_uitoa_base(unsigned long long n, char *set);
 int				print_memory(va_list ap, t_flags *flags);
 
 #endif

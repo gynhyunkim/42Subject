@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/08 00:39:13 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 13:51:25 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,39 @@ static char	*get_arg(va_list ap, t_flags *flags)
 	if (flags -> type == 'd' || flags -> type == 'i')
 		return (ft_itoa(va_arg(ap, int)));
 	else if (flags -> type == 'u')
-		return (ft_u_itoa(va_arg(ap, unsigned int)));
+		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789"));
 	else if (flags -> type == 'x')
 	{
-		return (ft_tohex(va_arg(ap, unsigned int), "0123456789abcdef"));
+		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789abcdef"));
 	}
 	else if (flags -> type == 'X')
-		return (ft_tohex(va_arg(ap, unsigned int), "0123456789ABCDEF"));
+		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789ABCDEF"));
 	return (NULL);
+}
+
+int			print_positive(char *num, t_flags *flags)
+{
+	int len;
+	int cnt;
+
+	cnt = ft_strlen(num);
+	len = cnt < flags -> prec ? flags -> prec : cnt;
+	if (!flags -> minus)
+		cnt += print_padding(flags -> width - len, flags -> zero);
+	cnt += print_padding(flags -> prec - ft_strlen(num), TRUE);
+	ft_putstr_fd(num, 1);
+	if (flags -> minus)
+		cnt += print_padding(flags -> width - len, FALSE);
+	return (cnt);
 }
 
 int			print_negative(char *num, t_flags *flags)
 {
 	int	len;
-	int cnt;
+	int	cnt;
 
 	cnt = ft_strlen(num);
-	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num)  : flags -> prec;
+	len = flags -> prec > cnt ? flags -> prec : cnt;
 	if (!flags -> minus && !flags -> zero)
 		cnt += print_padding(flags -> width - len, FALSE);
 	ft_putchar_fd(*num, 1);
@@ -43,33 +59,19 @@ int			print_negative(char *num, t_flags *flags)
 	cnt += print_padding(flags -> prec - ft_strlen(num), TRUE);
 	ft_putstr_fd(num, 1);
 	if (flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+		cnt += print_padding(flags -> width - cnt, FALSE);
 	return (cnt);
 }
 
 int			print_num(va_list ap, t_flags *flags)
 {
-	int		cnt;
-	int		len;
 	char	*num;
 
-	cnt = 0;
 	num = get_arg(ap, flags);
 	if (*num == '-')
 		return (print_negative(num, flags));
-	len = flags -> prec <= (int)ft_strlen(num) ? (int)ft_strlen(num) : flags -> prec;
-	if (flags -> prec == 0 && *num == '0')
-		len = 0;
-	if (!flags -> minus)
-		cnt += print_padding(flags -> width - len, flags -> zero);
-	cnt += print_padding(len - ft_strlen(num), TRUE);
-	if (!(*num == '0' && flags -> prec == 0))
-	{
-		ft_putstr_fd(num, 1);
-		cnt += ft_strlen(num);
-	}
-	if (flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+	else
+		return (print_positive(num, flags));
 	free(num);
-	return (cnt);
+	return (0);
 }

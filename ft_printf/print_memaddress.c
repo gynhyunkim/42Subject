@@ -6,30 +6,30 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:25:15 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 21:32:26 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 13:37:38 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_memory(va_list ap, t_flags *flags)
+int		print_memaddress(va_list ap, t_flags *flags)
 {
 	int					cnt;
-	char				*hex;
+	char				*add;
 	unsigned long long	mem;
 
 	cnt = 2;
 	mem = va_arg(ap, unsigned long long);
-	hex = ft_tohex(mem, "0123456789abcdef");
-	cnt += ft_strlen(hex);
+	add = ft_uitoa_base(mem, "0123456789abcdef");
+	cnt += ft_strlen(add);
 	if (!flags -> minus && !flags -> zero)
 		cnt += print_padding(flags -> width - cnt, FALSE);
 	ft_putstr_fd("0x", 1);
 	if (flags -> zero)
 		cnt += print_padding(flags -> width - cnt, TRUE);
-	ft_putstr_fd(hex, 1);
+	ft_putstr_fd(add, 1);
 	if (flags -> minus)
 		cnt += print_padding(flags -> width - cnt, FALSE);
-	free(hex);
+	free(add);
 	return (cnt);
 }

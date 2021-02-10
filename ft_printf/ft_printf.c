@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/08 00:20:56 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 13:38:07 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		print(va_list ap, t_flags *flags)
 	else if (type == 'd' || type == 'i' || type == 'u' || type == 'x' || type == 'X')
 		return (print_num(ap, flags));
 	else if (type == 'p')
-		return (print_memory(ap, flags));
+		return (print_memaddress(ap, flags));
 	return (-1);
 }
 
