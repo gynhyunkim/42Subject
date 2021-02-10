@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 13:51:25 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 14:00:15 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int			print_num(va_list ap, t_flags *flags)
 	char	*num;
 
 	num = get_arg(ap, flags);
+	if (flags -> prec == 0 && *num == '0')
+		return (0);
 	if (*num == '-')
 		return (print_negative(num, flags));
 	else
