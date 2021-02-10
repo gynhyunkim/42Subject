@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toresult.c                                         :+:      :+:    :+:   */
+/*   ft_uitoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 20:23:52 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 13:27:25 by gkim             ###   ########.fr       */
+/*   Created: 2021/02/10 21:25:07 by gkim              #+#    #+#             */
+/*   Updated: 2021/02/10 21:26:02 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char			*ft_uitoa_base(unsigned long long n, char *set)
 {
 	size_t			len;
 	unsigned int	base;
-	char	*result;
+	char			*result;
 
 	base = ft_strlen(set);
 	if (n == 0)
