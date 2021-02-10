@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:13:47 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/07 20:19:24 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 14:28:53 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int		print_string(va_list ap, t_flags *flags)
 	int		i;
 	int		len;
 
-	cnt = 0;
 	i = 0;
 	str = va_arg(ap, char *);
-	len = flags -> prec > -1 && flags -> prec < (int)ft_strlen(str) ? flags -> prec : (int)ft_strlen(str);
+	cnt = ft_strlen(str);
+	len = flags -> prec > -1 && flags -> prec < cnt ? flags -> prec : cnt;
+	cnt = len;
 	if (!flags -> minus)
 		cnt += print_padding(flags -> width - len, FALSE);
-	while (str[i] && len--)
+	while (str[i] && i < len)
 	{
 		ft_putchar_fd(str[i], 1);
-		cnt++;
 		i++;
 	}
 	if (flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+		cnt += print_padding(flags -> width - cnt, FALSE);
 	return (cnt);
 }
