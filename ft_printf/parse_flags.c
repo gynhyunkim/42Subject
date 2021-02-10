@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:16:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/09 20:40:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 14:47:09 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,5 @@ void	parse_flags(const char **format, va_list ap, t_flags **flg)
 	(*flg) -> type = **format;
 	if ((*flg) -> zero && ((*flg) -> minus || (*flg) -> prec > -1))
 		(*flg) -> zero = FALSE;
-	if ((*flg) -> type != 'd' && (*flg) -> type != 'i' &&
-	(*flg) -> minus && (*flg) -> prec > 0)
-		(*flg) -> minus = FALSE;
 }
 

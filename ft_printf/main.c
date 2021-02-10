@@ -30,7 +30,11 @@ int main(void)
 	// ft_printf("[%0*.*d]\n", 4, 3, 12);
 	// printf("[%*.*d]\n", 4, 3, -12);
 	// ft_printf("[%*.*d]\n", 4, 3, -12);
-	printf("[%*s]\n", -4, "abcdefghijklmnop");
+	printf("[%-*.*s]\n", 3, 3, "-a");
+	ft_printf("[%-*.*s]\n", 3, 3, "-a");
+	printf("[%-*.*d]\n", 4, 3, 12);
+	ft_printf("[%-*.*d]\n", 4, 3, 12);
+	ft_printf("[%-010d]\n", 12);
 	ft_printf("[%*s]\n", -4, "abcdefghijklmnop");
 	// printf("[%-010d]\n", 12);
 	// ft_printf("[%-010d]\n", 12);
