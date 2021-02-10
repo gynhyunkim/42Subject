@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 13:38:07 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 15:26:56 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		print(va_list ap, t_flags *flags)
 		return (print_num(ap, flags));
 	else if (type == 'p')
 		return (print_memaddress(ap, flags));
+	else if (type == '%')
+	{
+		ft_putchar_fd('%', 1);
+		return (1);
+	}
 	return (-1);
 }
 
