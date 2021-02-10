@@ -24,16 +24,16 @@ int		print_string(va_list ap, t_flags *flags)
 	if (!str)
 		str = "(null)";
 	cnt = ft_strlen(str);
-	len = flags -> prec > -1 && flags -> prec < cnt ? flags -> prec : cnt;
+	len = flags->prec > -1 && flags->prec < cnt ? flags->prec : cnt;
 	cnt = len;
-	if (!flags -> minus)
-		cnt += print_padding(flags -> width - len, FALSE);
+	if (!flags->minus)
+		cnt += print_padding(flags->width - len, FALSE);
 	while (str[i] && i < len)
 	{
 		ft_putchar_fd(str[i], 1);
 		i++;
 	}
-	if (flags -> minus)
-		cnt += print_padding(flags -> width - cnt, FALSE);
+	if (flags->minus)
+		cnt += print_padding(flags->width - cnt, FALSE);
 	return (cnt);
 }

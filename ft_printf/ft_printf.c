@@ -50,7 +50,7 @@ int		ft_printf(const char *format, ...)
 		}
 		else
 		{
-			write(1, format, 1);
+			ft_putchar_fd(*format, 1);
 			cnt++;
 		}
 		format++;

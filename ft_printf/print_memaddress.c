@@ -20,19 +20,19 @@ int		print_memaddress(va_list ap, t_flags *flags)
 
 	cnt = 2;
 	mem = va_arg(ap, unsigned long long);
-	if (mem == 0 && flags -> prec == 0)
+	if (mem == 0 && flags->prec == 0)
 		add = ft_strdup("");
 	else
 		add = ft_uitoa_base(mem, "0123456789abcdef");
 	cnt += ft_strlen(add);
-	if (!flags -> minus && !flags -> zero)
-		cnt += print_padding(flags -> width - cnt, FALSE);
+	if (!flags->minus && !flags->zero)
+		cnt += print_padding(flags->width - cnt, FALSE);
 	ft_putstr_fd("0x", 1);
-	if (flags -> zero)
-		cnt += print_padding(flags -> width - cnt, TRUE);
+	if (flags->zero)
+		cnt += print_padding(flags->width - cnt, TRUE);
 	ft_putstr_fd(add, 1);
-	if (flags -> minus)
-		cnt += print_padding(flags -> width - cnt, FALSE);
+	if (flags->minus)
+		cnt += print_padding(flags->width - cnt, FALSE);
 	free(add);
 	return (cnt);
 }

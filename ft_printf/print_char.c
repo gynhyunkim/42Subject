@@ -18,14 +18,14 @@ int		print_char(va_list ap, t_flags *flags)
 	int		cnt;
 
 	cnt = 1;
-	if (flags -> type == 'c')
+	if (flags->type == 'c')
 		c = va_arg(ap, int);
 	else
 		c = '%';
 	if (!flags-> minus)
-		cnt += print_padding(flags -> width - 1, flags -> zero);
+		cnt += print_padding(flags->width - 1, flags->zero);
 	ft_putchar_fd(c, 1);
-	if (flags -> minus)
-		cnt += print_padding(flags -> width - 1, FALSE);
+	if (flags->minus)
+		cnt += print_padding(flags->width - 1, FALSE);
 	return (cnt);
 }
