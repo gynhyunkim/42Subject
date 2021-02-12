@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:16:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 21:27:31 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 22:44:06 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	set_width(const char **format, va_list ap, t_flags *flg)
 	}
 }
 
-void	parse_flags(const char **format, va_list ap, t_flags **flg)
+void		parse_flags(const char **format, va_list ap, t_flags **flg)
 {
 	init_flags(flg);
 	while (!ft_isalpha(**format) && **format)

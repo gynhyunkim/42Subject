@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_num.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:21:49 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 14:16:56 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/11 18:29:53 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static char	*get_arg(va_list ap, t_flags *flags)
 	if (flags->type == 'd' || flags->type == 'i')
 		return (ft_itoa(va_arg(ap, int)));
 	else if (flags->type == 'u')
-		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789"));
+		return (ft_ulltoa_base(va_arg(ap, unsigned int), "0123456789"));
 	else if (flags->type == 'x')
 	{
-		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789abcdef"));
+		return (ft_ulltoa_base(va_arg(ap, unsigned int), "0123456789abcdef"));
 	}
 	else if (flags->type == 'X')
-		return (ft_uitoa_base(va_arg(ap, unsigned int), "0123456789ABCDEF"));
+		return (ft_ulltoa_base(va_arg(ap, unsigned int), "0123456789ABCDEF"));
 	return (NULL);
 }
 
@@ -66,17 +66,20 @@ static int	print_negative(char *num, t_flags *flags)
 int			print_num(va_list ap, t_flags *flags)
 {
 	char	*num;
+	int		cnt;
 
-	num = get_arg(ap, flags);
+	cnt = 0;
+	if (!(num = get_arg(ap, flags)))
+		return (-1);
 	if (flags->prec == 0 && *num == '0')
 	{
 		free(num);
 		num = ft_strdup("");
 	}
 	if (*num == '-')
-		return (print_negative(num, flags));
+		cnt += print_negative(num, flags);
 	else
-		return (print_positive(num, flags));
+		cnt += print_positive(num, flags);
 	free(num);
-	return (0);
+	return (cnt);
 }

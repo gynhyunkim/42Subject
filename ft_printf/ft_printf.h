@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 16:50:48 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 21:29:43 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/11 11:32:22 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				print_string(va_list ap, t_flags *flags);
 int				print_padding(int n, t_bool zero);
 int				print_char(va_list ap, t_flags *flags);
 int				print_num(va_list ap, t_flags *flags);
-char			*ft_uitoa_base(unsigned long long n, char *set);
+char			*ft_ulltoa_base(unsigned long long n, char *set);
 int				print_memory(va_list ap, t_flags *flags);
 
 #endif

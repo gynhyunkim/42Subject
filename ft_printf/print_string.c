@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:13:47 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 15:32:33 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/10 22:45:45 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int		print_string(va_list ap, t_flags *flags)
 
 	i = 0;
 	str = va_arg(ap, char *);
-	if (!str && flags -> prec == -1)
+	if (!str)
 		str = "(null)";
-	else if (!str && flags -> prec > -1)
-		str = "";
 	cnt = ft_strlen(str);
 	len = flags->prec > -1 && flags->prec < cnt ? flags->prec : cnt;
 	cnt = len;

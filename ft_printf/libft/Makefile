@@ -59,7 +59,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 bonus : $(OBJS_B)
-	$(AR) $(AFLAGS) $(NAME) $(OBJS_B)
+	$(AR) $(AFLAGS) $(NAME) $^
 
 clean :
 	rm -f $(OBJS) $(OBJS_B)

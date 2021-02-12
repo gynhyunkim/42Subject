@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 16:50:57 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 20:46:02 by gkim             ###   ########.fr       */
+/*   Created: 2021/02/10 22:38:06 by gkim              #+#    #+#             */
+/*   Updated: 2021/02/11 18:18:32 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print(va_list ap, t_flags *flags)
+static int	print_type(va_list ap, t_flags *flags)
 {
 	int type;
 
@@ -31,22 +31,21 @@ int		print(va_list ap, t_flags *flags)
 	return (-1);
 }
 
-int		ft_printf(const char *format, ...)
+static int	print_format(const char *format, va_list ap, t_flags *flags)
 {
-	va_list ap;
-	t_flags	*flags;
-	int		cnt;
+	int	cnt;
+	int	check_return;
 
 	cnt = 0;
-	flags = (t_flags *)malloc(sizeof(t_flags));
-	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			++format;
 			parse_flags(&format, ap, &flags);
-			cnt += print(ap, flags);
+			if ((check_return = print_type(ap, flags)) == -1)
+				return (-1);
+			cnt += check_return;
 		}
 		else
 		{
@@ -55,7 +54,19 @@ int		ft_printf(const char *format, ...)
 		}
 		format++;
 	}
-	va_end(ap);
+	return (cnt);
+}
+
+int			ft_printf(const char *format, ...)
+{
+	va_list ap;
+	t_flags *flags;
+	int		cnt;
+
+	va_start(ap, format);
+	flags = (t_flags *)malloc(sizeof(t_flags));
+	cnt = print_format(format, ap, flags);
 	free(flags);
+	va_end(ap);
 	return (cnt);
 }

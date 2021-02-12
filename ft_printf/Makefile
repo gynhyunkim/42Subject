@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra
 AFLAGS = rcs
 NAME = libftprintf.a
 SRCS =	ft_printf.c\
-		ft_uitoa_base.c\
+		ft_ulltoa_base.c\
 		parse_flags.c\
 		print_char.c\
 		print_memaddress.c\

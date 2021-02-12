@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   print_memaddress.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 20:25:15 by gkim              #+#    #+#             */
-/*   Updated: 2021/02/10 20:18:05 by gkim             ###   ########.fr       */
+/*   Updated: 2021/02/11 11:33:04 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int		print_memaddress(va_list ap, t_flags *flags)
 	if (mem == 0 && flags->prec == 0)
 		add = ft_strdup("");
 	else
-		add = ft_uitoa_base(mem, "0123456789abcdef");
+		add = ft_ulltoa_base(mem, "0123456789abcdef");
+	if (!add)
+		return (-1);
 	cnt += ft_strlen(add);
 	if (!flags->minus && !flags->zero)
 		cnt += print_padding(flags->width - cnt, FALSE);
