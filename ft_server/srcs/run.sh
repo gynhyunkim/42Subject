@@ -3,6 +3,8 @@ chmod 755 /run.sh
 chown -R www-data:www-data /var/www/
 chmod -R 755 /var/www/
 
+cp /tmp/${CONF} /etc/nginx/sites-available/default 
+
 openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/O=42Seoul/OU=gkim/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt
 mv localhost.dev.crt /etc/ssl/certs/
 mv localhost.dev.key /etc/ssl/private/
