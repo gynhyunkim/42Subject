@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:47:14 by gkim              #+#    #+#             */
-/*   Updated: 2021/05/24 15:39:18 by gkim             ###   ########.fr       */
+/*   Updated: 2021/05/24 17:10:03 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list  *init_node(int data)
 
 void	add_back(t_list *node, t_stack *stack)
 {
-	node->last = stack->last;
+	node->next = stack->last;
 	node->prev = stack->last->prev;
 	stack->last->prev->next = node;
 	stack->last->prev = node;

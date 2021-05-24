@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:16:09 by gkim              #+#    #+#             */
-/*   Updated: 2021/05/24 15:39:05 by gkim             ###   ########.fr       */
+/*   Updated: 2021/05/24 17:10:21 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void    swap(t_obj *o, int key);
 void	push(t_obj *o, int key);
 void	rotate(t_obj *o, int key);
 void	reverse_rotate(t_obj *o, int key);
+t_obj	*init_stack();
+
 
 # endif
