@@ -58,17 +58,12 @@ $(NAME) : $(OBJECTS)
 
 all : $(NAME)
 
-<<<<<<< HEAD
 so:
 	$(CC) -fPIC $(CFLAGS) $(SOURCES)
 	gcc -shared -o libft.so $(OBJECTS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
-=======
-bonus : $(OBJECTS_B)
-	$(AR) $(AFLAGS) $(NAME) $^
->>>>>>> a384496af88f26732d05f5ee1daeccd3adbca65b
 
 
 clean :
@@ -79,10 +74,6 @@ fclean : clean
 
 re : fclean all
 
-<<<<<<< HEAD
 
 
 .PHONY : all clean fclean re
-=======
-.PHONY : all clean fclean re bonus
->>>>>>> a384496af88f26732d05f5ee1daeccd3adbca65b
