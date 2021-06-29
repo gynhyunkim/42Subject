@@ -49,5 +49,4 @@ void	reverse_rotate(t_obj *o, int key);
 t_obj	*init_stack();
 void	quick_sort_stack(t_obj *o, int p, int r, int **sorted);
 
-
 # endif
