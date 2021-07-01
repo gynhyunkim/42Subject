@@ -13,10 +13,10 @@ $(NAME) : $(OBJS)
 	$(MAKE) all -C ./libft
 	$(CC) $^ -o $@ -lft -L./libft -I./
 
-all : $(NAME)
-
 $(OBJS) : $(SRCS)
 	$(CC) -c $^
+
+all : $(NAME)
 
 clean :
 	$(MAKE) clean -C ./libft

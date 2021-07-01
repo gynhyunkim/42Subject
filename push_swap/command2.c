@@ -14,20 +14,37 @@
 
 void	sort(t_obj *o, int key)
 {
-	t_dlist	*node;
+	t_node	*n1, *n2, *n3;
 
-	node = o->stack[key]->head->next;
+	n1 = o->stack[key]->head->next;
+	n2 = n1->next;
+	n3 = n2->next;
+
+	if (n1->data > n2->data)
+	{
+		if (n1->data > n3->data)
+			rotate(o, key);
+		if (n2->data > n3->data || n1->data < n3->data)
+			swap(o, key);
+	}
+	else
+	{
+		if (n2->data > n3->data)
+			reverse_rotate(o, key);
+		if (n3->data > n1->data)
+			swap(o, key);
+	}
 	
 }
 
 void	quick_sort_stack(t_obj *o, int p, int r, int **sorted)
 {
 	int		pivot1, pivot2, ra;
-	t_dlist	*node;
+	t_node	*node;
 
 	if (r - p <= 3)
 	{
-		// sort(o, 0);
+		sort(o, 0);
 		return ;	
 	}
 	if (p < r)

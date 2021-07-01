@@ -18,17 +18,17 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
-typedef struct	s_dlist
+typedef struct	s_node
 {
-	struct s_dlist	*next;
-	struct s_dlist	*prev;
+	struct s_node	*next;
+	struct s_node	*prev;
 	int				data;
-}				t_dlist;
+}				t_node;
 
 typedef struct s_stack
 {
-	t_dlist	*head;
-	t_dlist	*last;
+	t_node	*head;
+	t_node	*last;
 	int		size;
 }				t_stack;
 
@@ -38,15 +38,16 @@ typedef struct	s_obj
 	t_stack	*cmd;
 }				t_obj;
 
-t_dlist  *init_node(int data);
-void	add_back(t_dlist *node, t_stack *stack);
-void	add_front(t_dlist *node, t_stack *stack);
-t_dlist	*pop(t_dlist *node, t_stack *stack);
+t_node  *init_node(int data);
+void	add_back(t_node *node, t_stack *stack);
+void	add_front(t_node *node, t_stack *stack);
+t_node	*pop(t_node *node, t_stack *stack);
 void    swap(t_obj *o, int key);
 void	push(t_obj *o, int key);
 int		rotate(t_obj *o, int key);
 void	reverse_rotate(t_obj *o, int key);
 t_obj	*init_stack();
 void	quick_sort_stack(t_obj *o, int p, int r, int **sorted);
+void	sort(t_obj *o, int key);
 
 # endif

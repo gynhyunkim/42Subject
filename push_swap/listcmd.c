@@ -12,18 +12,18 @@
 
 #include "push_swap.h"
 
-t_dlist  *init_node(int data)
+t_node  *init_node(int data)
 {
-	t_dlist  *node;
+	t_node  *node;
 	
-	node = malloc(sizeof(t_dlist));
+	node = malloc(sizeof(t_node));
 	node->data = data;
 	node->next = 0;
 	node->prev = 0;
 	return (node);
 }
 
-void	add_back(t_dlist *node, t_stack *stack)
+void	add_back(t_node *node, t_stack *stack)
 {
 	node->next = stack->last;
 	node->prev = stack->last->prev;
@@ -32,7 +32,7 @@ void	add_back(t_dlist *node, t_stack *stack)
 	stack->size++;
 }
 
-void	add_front(t_dlist *node, t_stack *stack)
+void	add_front(t_node *node, t_stack *stack)
 {
 	node->prev = stack->head;
 	node->next = stack->head->next;
@@ -41,7 +41,7 @@ void	add_front(t_dlist *node, t_stack *stack)
 	stack->size++;
 }
 
-t_dlist	*pop(t_dlist *node, t_stack *stack)
+t_node	*pop(t_node *node, t_stack *stack)
 {
 	node->prev->next = node->next;
 	node->next->prev = node->prev;

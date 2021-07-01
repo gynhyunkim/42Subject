@@ -14,7 +14,7 @@
 
 void	print(t_obj *o, int key)
 {
-	t_dlist	*node;
+	t_node	*node;
 
 	node = o->stack[key]->head;
 	while (node->next->next)
@@ -72,7 +72,7 @@ void	quick_sort(int *a[], int p, int r)
 int main(int argc, char **argv)
 {
 	int i;
-	t_dlist	*node;
+	t_node	*node;
 	t_obj	*o;
 	int	*array[2];
 
@@ -89,14 +89,20 @@ int main(int argc, char **argv)
 			array[1][i - 1] = i - 1;
 			i++;
 		}
-		quick_sort(array, 0, argc - 2);
-		i = 0;
+		if (argc == 4)
+			sort(o, 0);
+		else
+		{
+			quick_sort(array, 0, argc - 2);
+			quick_sort_stack(o, 0, argc - 1, array);
+		}
+		//i = 0;
 		// while (i < argc - 1)
 		// 	printf("%d ", array[1][i++]);
 		// printf("\n");
 	}
-	printf("%d\n", o->stack[0]->size);
-	quick_sort_stack(o, 0, argc - 1, array);
+	// printf("%d\n", o->stack[0]->size);
+	
 	print(o, 0);
 	print(o, 1);
 }
