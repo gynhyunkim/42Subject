@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 17:46:35 by gkim              #+#    #+#             */
-/*   Updated: 2021/07/07 17:02:12 by gkim             ###   ########.fr       */
+/*   Created: 2021/07/07 16:42:34 by gkim              #+#    #+#             */
+/*   Updated: 2021/07/07 16:49:17 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minitalk.h"
+#include <stdio.h>
 
-t_list	*ft_lstnew(void *content)
+int main()
 {
-	t_list	*newlst;
-
-	newlst = (t_list *)malloc(sizeof(t_list));
-	if (!newlst)
-		return (NULL);
-	newlst->content = content;
-	newlst->next = NULL;
-	return (newlst);
+    printf("%d", getpid());
 }

@@ -1,24 +1,25 @@
-  
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/25 16:49:23 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/07 17:00:44 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strnstr(const char *hay, const char *nee, size_t len)
+char	*ft_strnstr(const char *hay, const char *nee, size_t len)
 {
-	size_t		n;
-    if (!*hay)
-        return (NULL);
-	if (!(n = ft_strlen(nee)))
+	size_t	n;
+
+	if (!*hay)
+		return (NULL);
+	n = ft_strlen(nee);
+	if (!n)
 		return ((char *)hay);
 	while (len >= n && *hay)
 	{
@@ -28,8 +29,4 @@ char			*ft_strnstr(const char *hay, const char *nee, size_t len)
 		len--;
 	}
 	return (NULL);
-}
-int		main(void)
-{
-	char *test = ft_strnstr((void *)NULL,"123",2);
 }

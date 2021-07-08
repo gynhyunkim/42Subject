@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:39:22 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/21 21:56:17 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/08 17:27:55 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	jump_space(const char *str, int *idx)
 {
-	while (str[*idx] == '\n' || str[*idx] == '\t' || str[*idx] == '\v' ||
-	str[*idx] == '\r' || str[*idx] == '\f' || str[*idx] == ' ')
+	while (str[*idx] == '\n' || str[*idx] == '\t' || str[*idx] == '\v'
+		|| str[*idx] == '\r' || str[*idx] == '\f' || str[*idx] == ' ')
 		(*idx)++;
 }
 
@@ -30,11 +30,11 @@ static void	chk_mark(const char c, int *mark, int *idx)
 		(*idx)++;
 }
 
-int			ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	int mark;
-	int num;
-	int i;
+	int	mark;
+	int	num;
+	int	i;
 
 	i = 0;
 	mark = 1;

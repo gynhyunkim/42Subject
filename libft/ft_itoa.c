@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 14:31:17 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/26 21:57:14 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/08 17:28:40 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static size_t	chk_digit(int n)
 	return (digit);
 }
 
-static char		*ft_convert(unsigned int n, char *num)
+static char	*ft_convert(unsigned int n, char *num)
 {
-	int i;
+	int	i;
 
 	i = (int)ft_strlen(num) - 1;
 	if (!n)
@@ -45,14 +45,15 @@ static char		*ft_convert(unsigned int n, char *num)
 	return (num);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	unsigned int	num;
 	char			*result;
 	size_t			digit;
 
 	digit = chk_digit(n);
-	if (!(result = (char *)malloc(digit + 1)))
+	result = malloc(digit + 1);
+	if (!result)
 		return (NULL);
 	result = (char *)ft_memset(result, 1, digit);
 	result[digit] = '\0';

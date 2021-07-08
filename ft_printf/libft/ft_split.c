@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:59:57 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/25 16:51:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/08 17:25:05 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static char	**splitword(char *s, char c, char **strs, int cnt)
 		{
 			if (size != 0)
 			{
-				if ((strs[j] = ft_substr(s, i - size, size)) == NULL)
+				strs[j] = ft_substr(s, i - size, size);
+				if (!strs[j])
 					return (free_strs(strs, j));
 				j++;
 			}
@@ -76,7 +77,7 @@ static char	**splitword(char *s, char c, char **strs, int cnt)
 	return (strs);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**strs;
 	int		cnt;

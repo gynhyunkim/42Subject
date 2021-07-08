@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 14:18:37 by gkim              #+#    #+#             */
-/*   Updated: 2020/12/25 16:49:23 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/07 17:00:44 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strnstr(const char *haystack, const char *niddle, size_t len)
+char	*ft_strnstr(const char *hay, const char *nee, size_t len)
 {
-	if (ft_strlen(niddle) == 0)
-		return ((char *)haystack);
-	while (len-- && *haystack)
+	size_t	n;
+
+	if (!*hay)
+		return (NULL);
+	n = ft_strlen(nee);
+	if (!n)
+		return ((char *)hay);
+	while (len >= n && *hay)
 	{
-		if (*haystack == niddle[0] && len + 1 >= ft_strlen(niddle))
-		{
-			if (ft_memcmp(haystack, niddle, ft_strlen(niddle)) == 0)
-				return ((char *)haystack);
-		}
-		haystack++;
+		if (!(ft_strncmp(hay, nee, n)))
+			return ((char *)hay);
+		hay++;
+		len--;
 	}
 	return (NULL);
 }
