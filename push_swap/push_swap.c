@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:36:04 by gkim              #+#    #+#             */
-/*   Updated: 2021/06/17 20:38:44 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/09 16:45:47 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int main(int argc, char **argv)
 		}
 		if (argc == 4)
 			sort(o, 0);
+		else if (argc == 6)
+			five_param(o);
 		else
 		{
 			quick_sort(array, 0, argc - 2);

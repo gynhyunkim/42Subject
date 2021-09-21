@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:28:08 by gkim              #+#    #+#             */
-/*   Updated: 2021/06/17 22:16:21 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/09 16:55:09 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,34 @@ void	sort(t_obj *o, int key)
 		if (n3->data > n1->data)
 			swap(o, key);
 	}
-	
+}
+
+void	five_param(t_obj *o)
+{
+	int	i;
+
+	for (i = 0; i < 2; i++)
+	{
+		push(o, 0);
+		push(o, 0);
+		sort(o, 0);
+		push(o, 1);
+		if (o->stack[0]->head->next->data > o->stack[0]->head->next->next->data)
+		{
+			if (o->stack[0]->head->next->data - o->stack[0]->head->next->next->data == 1)
+				swap(o, 0);
+			else
+				rotate(o, 0); 
+		}
+		push(o, 1);
+		if (o->stack[0]->head->next->data > o->stack[0]->head->next->next->data)
+		{
+			if (o->stack[0]->head->next->data - o->stack[0]->head->next->next->data == 1)
+				swap(o, 0);
+			else
+				rotate(o, 0); 
+		}
+	}
 }
 
 void	quick_sort_stack(t_obj *o, int p, int r, int **sorted)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:16:09 by gkim              #+#    #+#             */
-/*   Updated: 2021/06/17 20:39:07 by gkim             ###   ########.fr       */
+/*   Updated: 2021/07/09 16:45:32 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	reverse_rotate(t_obj *o, int key);
 t_obj	*init_stack();
 void	quick_sort_stack(t_obj *o, int p, int r, int **sorted);
 void	sort(t_obj *o, int key);
+void	five_param(t_obj *o);
 
 # endif
