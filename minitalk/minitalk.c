@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-void	convert(unsigned char c, unsigned char *b)
+void	convert(char c, char *b)
 {
 	int	i;
 
@@ -28,13 +28,14 @@ int	main(int argc, char *argv[])
 {
 	int	pid;
 	int	cnt;
-	unsigned char	c[8], *str;
+	char	c[8];
+	char	*str;
 
 	if (argc != 3)
 		write(0, "ERROR!\n", 7);
 	pid = ft_atoi(argv[1]);
 	cnt = 0;
-	str = (unsigned char *)argv[2];
+	str = argv[2];
 	while (*str) {
 		convert(*str, c);
 		for (int i = 0; i < 8; i++) {
