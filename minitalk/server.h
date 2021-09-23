@@ -24,4 +24,4 @@ void	ft_putstr_fd(char *str, int fd);
 t_list	*ft_lstnew(char content);
 t_list	*ft_lstlast(t_list *lst);
 
-# endif
+#endif
