@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/23 18:39:56 by gkim             ###   ########.fr       */
+/*   Updated: 2021/09/23 18:54:51 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_signal(int pid, char *bit)
 
 void	char_to_bit(char c, char *c_bit)
 {
-	int	i;
+	int i;
 
 	i = 7;
 	while (i >= 0)
