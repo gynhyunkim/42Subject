@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 16:42:34 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/23 18:57:37 by gkim             ###   ########.fr       */
+/*   Updated: 2021/09/23 18:58:24 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	sig_handler(int signo)
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	init_msg();
 	ft_putstr_fd("server pid : ", 0);
 	ft_putnbr_fd(getpid(), 0);
 	if (signal(SIGUSR1, sig_handler) == SIG_ERR
-	|| signal(SIGUSR2, sig_handler) == SIG_ERR)
+		|| signal(SIGUSR2, sig_handler) == SIG_ERR)
 		ft_putstr_fd("ERROR!", 2);
 	while (1)
 	{
