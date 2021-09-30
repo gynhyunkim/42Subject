@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/23 19:05:35 by gkim             ###   ########.fr       */
+/*   Updated: 2021/09/30 17:26:31 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,17 @@ int	main(int argc, char *argv[])
 
 	if (argc != 3)
 		write(0, "ERROR!\n", 7);
-	pid = ft_atoi(argv[1]);
-	str = argv[2];
-	while (*str)
+	else
 	{
+		pid = ft_atoi(argv[1]);
+		str = argv[2];
+		while (*str)
+		{
+			char_to_bit(*str, bit);
+			send_signal(pid, bit);
+			str++;
+		}
 		char_to_bit(*str, bit);
 		send_signal(pid, bit);
-		str++;
 	}
-	char_to_bit(*str, bit);
-	send_signal(pid, bit);
 }
