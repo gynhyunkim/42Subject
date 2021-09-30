@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/30 17:26:31 by gkim             ###   ########.fr       */
+/*   Updated: 2021/09/30 18:29:24 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[])
 			send_signal(pid, bit);
 			str++;
 		}
-		char_to_bit(*str, bit);
+		char_to_bit(127, bit);
 		send_signal(pid, bit);
 	}
 }
