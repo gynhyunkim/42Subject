@@ -6,18 +6,18 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/25 16:24:33 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/02 02:57:40 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_signal(int pid, char *bit)
+void	send_signal(int pid, char *bit, int len)
 {
 	int	i;
 
 	i = 0;
-	while (i < 8)
+	while (i < len)
 	{
 		kill(pid, SIGUSR1 + bit[i]);
 		usleep(100);
@@ -25,34 +25,63 @@ void	send_signal(int pid, char *bit)
 	}	
 }
 
-void	char_to_bit(char c, char *c_bit)
+void	convert_to_bit(int c, char *c_bit, int len)
 {
-	int	i;
+	int i;
 
-	i = 7;
+	i = len - 1;
 	while (i >= 0)
 	{
-		c_bit[7 - i] = (c >> i) & 1;
+		c_bit[len - i - 1] = (c >> i) & 1;
 		i--;
 	}
+}
+
+void	sig_handler2(int signo)
+{
+	if (signo == SIGUSR1)
+		write(1, "Success to sending a message!\n", 31);
+	exit(0);
+}
+
+void	sig_handler1(int signo)
+{
+	if (signo == SIGUSR1)
+		write(1, "Success to seding a length!\n", 29);
+}
+
+int		ft_strlen(char *str)
+{
+	int len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
 int	main(int argc, char *argv[])
 {
 	int		pid;
 	char	*str;
-	char	bit[8];
+	char	bit[32];
 
 	if (argc != 3)
-		write(2, "ARGUMENT ERROR!\n", 7);
-	pid = ft_atoi(argv[1]);
-	str = argv[2];
-	while (*str)
+		write(2, "ERROR!\n", 6);
+	else
 	{
-		char_to_bit(*str, bit);
-		send_signal(pid, bit);
-		str++;
+		pid = ft_atoi(argv[1]);
+		str = argv[2];
+		signal(SIGUSR1, sig_handler1);
+		convert_to_bit(ft_strlen(str), bit, 32);
+		send_signal(pid, bit, 32);
+		pause();
+		signal(SIGUSR1, sig_handler2);
+		while (*str)
+		{
+			convert_to_bit(*str, bit, 8);
+			send_signal(pid, bit, 8);
+			str++;
+		}
 	}
-	char_to_bit(*str, bit);
-	send_signal(pid, bit);
 }
