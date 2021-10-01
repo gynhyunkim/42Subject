@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/09/23 19:05:35 by gkim             ###   ########.fr       */
+/*   Updated: 2021/09/25 16:24:33 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[])
 	char	bit[8];
 
 	if (argc != 3)
-		write(0, "ERROR!\n", 7);
+		write(2, "ARGUMENT ERROR!\n", 7);
 	pid = ft_atoi(argv[1]);
 	str = argv[2];
 	while (*str)

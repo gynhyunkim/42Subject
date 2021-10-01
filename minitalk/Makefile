@@ -30,7 +30,7 @@ $(C_OBJS) : $(C_SRCS)
 clean : 
 	rm -rf $(S_OBJS) $(C_OBJS)
 
-fclean :
+fclean : clean
 	rm -rf $(NAME) $(NAME2)
 
 re : fclean all
