@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/03 17:41:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/03 18:06:59 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	send_signal(int pid, char *bit, int len)
 	i = 0;
 	while (i < len)
 	{
-		usleep(50);
 		kill(pid, SIGUSR1 + bit[i]);
+		usleep(100);
 		pause();
 		i++;
 	}
