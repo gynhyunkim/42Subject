@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/03 17:41:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/03 19:39:40 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	send_signal(int pid, char *bit, int len)
 	i = 0;
 	while (i < len)
 	{
-		usleep(50);
 		kill(pid, SIGUSR1 + bit[i]);
-		pause();
+		usleep(50);
 		i++;
 	}
 }
@@ -42,7 +41,7 @@ void	sig_handler(int signo)
 {
 	if (signo == SIGUSR2)
 	{
-		write(1, "client : Success to sending a message!\n", 40);
+		write(1, "client : connect error\n", 23);
 		exit(0);
 	}
 }
@@ -54,7 +53,7 @@ int	main(int argc, char *argv[])
 	char	bit[32];
 
 	if (argc != 3)
-		write(2, "arguments error!\n", 17);
+		write(2, "argument error!\n", 17);
 	else
 	{
 		signal(SIGUSR1, sig_handler);
@@ -69,6 +68,5 @@ int	main(int argc, char *argv[])
 			send_signal(pid, bit, 8);
 			str++;
 		}
-		pause();
 	}
 }
