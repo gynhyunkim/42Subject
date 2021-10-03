@@ -7,17 +7,19 @@
 
 typedef struct s_msg
 {
-	char	*msg_buf;
-	int		msg_len;
-	int		msg_idx;
-	int		bit_cnt;
-	char	buf;
+	struct sigaction	sa[2];
+	char				buf;
+	char				*msg_buf;
+	int					msg_len;
+	int					msg_idx;
+	int					bit_cnt;
+	int					cur_pid;
 }	t_msg;
 
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *str, int fd);
-// t_list	*ft_lstnew(char content);
-// t_list	*ft_lstlast(t_list *lst);
+void	print_msg(int pid, char *str, int len);
+void	print_err(int pid);
 
 #endif
