@@ -19,7 +19,6 @@ typedef struct s_msg
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *str, int fd);
-void	print_msg(int pid, char *str, int len);
-void	print_err(char *str, int pid);
+void	print_msg(int pid, char *str);
 
 #endif

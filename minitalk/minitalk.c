@@ -6,13 +6,13 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/04 22:26:58 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 23:14:50 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_signal(int pid, char *bit, int len)
+static void	send_signal(int pid, char *bit, int len)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	send_signal(int pid, char *bit, int len)
 	}
 }
 
-void	convert_to_bit(int c, char *c_bit, int len)
+static void	convert_to_bit(int c, char *c_bit, int len)
 {
 	int	i;
 
@@ -37,16 +37,16 @@ void	convert_to_bit(int c, char *c_bit, int len)
 	}
 }
 
-void	sig_handler(int signo)
+static void	sig_handler(int signo)
 {
 	if (signo == SIGUSR2)
 	{
-		write(2, "client : error!\n", 27);
+		write(2, "client : error!\n", 17);
 		exit(0);
 	}
 }
 
-int	main(int argc, char *argv[])
+int			main(int argc, char *argv[])
 {
 	int		pid;
 	char	*str;
@@ -56,13 +56,13 @@ int	main(int argc, char *argv[])
 		write(2, "arguments error!\n", 17);
 	else
 	{
-		signal(SIGUSR1, sig_handler);
-		signal(SIGUSR2, sig_handler);
+		if (signal(SIGUSR1, sig_handler)
+			|| signal(SIGUSR2, sig_handler))
+			write(2, "signal error!\n", 14);
 		pid = ft_atoi(argv[1]);
 		str = argv[2];
 		convert_to_bit(ft_strlen(str), bit, 32);
 		send_signal(pid, bit, 32);
-		pause();
 		while (*str)
 		{
 			convert_to_bit(*str, bit, 8);

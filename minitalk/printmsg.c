@@ -6,21 +6,17 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 17:26:44 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/04 11:57:45 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 22:47:26 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	print_msg(int pid, char *str, int len)
+void	print_msg(int pid, char *str)
 {
-	write(1, "messge : [ ", 12);
-	write(1, str, len);
-	ft_putstr_fd(" ]\n", 0);
-}
-
-void	print_err(char *msg, int pid)
-{
-	ft_putstr_fd(msg, 1);
-	kill(pid, SIGUSR2);
+	ft_putstr_fd("client pid : ", 1);
+	ft_putnbr_fd(pid, 1);
+	ft_putstr_fd("message : [ ",1);
+	ft_putstr_fd(str, 1);
+	ft_putstr_fd(" ]\n", 1);
 }

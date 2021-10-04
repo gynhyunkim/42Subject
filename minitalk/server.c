@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 16:42:34 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/04 11:59:18 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 23:08:54 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_msg(void)
 	set_sigaction(0);
 }
 
-void	sa_message(int signo, siginfo_t *info, void *old)
+void	sa_message(int signo, siginfo_t *info, void *context)
 {
 	if (g_msg.cur_pid == info->si_pid)
 	{
@@ -44,7 +44,7 @@ void	sa_message(int signo, siginfo_t *info, void *old)
 			g_msg.msg_buf[g_msg.msg_idx++] = g_msg.buf;
 			if (g_msg.msg_idx == g_msg.msg_len)
 			{
-				print_msg(info->si_pid, g_msg.msg_buf, g_msg.msg_len);
+				print_msg(g_msg.cur_pid, g_msg.msg_buf);
 				init_msg();
 			}	
 			g_msg.buf = 0;
@@ -52,13 +52,12 @@ void	sa_message(int signo, siginfo_t *info, void *old)
 		}
 	}
 	else
-		print_err("server : signal interrupt!\n", info->si_pid);
-
+		kill(info->si_pid, SIGUSR2);
 }
 
-void	sa_length(int signo, siginfo_t *info, void *uncontext)
+void	sa_length(int signo, siginfo_t *info, void *context)
 {
-	if (g_msg.bit_cnt == 0 && g_msg.cur_pid == 0)
+	if (g_msg.cur_pid == 0)
 		g_msg.cur_pid = info->si_pid;
 	if (g_msg.cur_pid == info->si_pid)
 	{
@@ -69,18 +68,15 @@ void	sa_length(int signo, siginfo_t *info, void *uncontext)
 			g_msg.msg_buf = (char *)malloc(g_msg.msg_len);
 			if (!g_msg.msg_buf)
 			{
-				print_err("server : malloc error!\n", g_msg.cur_pid);
+				kill(g_msg.cur_pid, SIGUSR2);
 				init_msg();
 			}
-			kill(info->si_pid, SIGUSR1);
 			set_sigaction(1);
-			ft_putstr_fd("len : ", 1);
-			ft_putnbr_fd(g_msg.msg_len, 1);
 			g_msg.bit_cnt = 0;
 		}
 	}
 	else
-		print_err("server : signal interrupt!\n", info->si_pid);
+		kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)
@@ -89,10 +85,9 @@ int	main(void)
 	g_msg.sa[0].sa_flags = SA_SIGINFO;
 	g_msg.sa[1].sa_sigaction = sa_message;
 	g_msg.sa[1].sa_flags = SA_SIGINFO;
-	set_sigaction(0);
-	ft_putstr_fd("server pid : ", 0);
-	ft_putnbr_fd(getpid(), 0);
 	init_msg();
+	ft_putstr_fd("server pid : ", 1);
+	ft_putnbr_fd(getpid(), 1);
 	while (1)
 	{
 		pause();
