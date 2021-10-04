@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 16:42:34 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/04 11:59:18 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 22:37:25 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	sa_message(int signo, siginfo_t *info, void *old)
 			g_msg.msg_buf[g_msg.msg_idx++] = g_msg.buf;
 			if (g_msg.msg_idx == g_msg.msg_len)
 			{
-				print_msg(info->si_pid, g_msg.msg_buf, g_msg.msg_len);
+				print_msg(g_msg.msg_buf, g_msg.msg_len);
 				init_msg();
 			}	
 			g_msg.buf = 0;
@@ -52,13 +52,12 @@ void	sa_message(int signo, siginfo_t *info, void *old)
 		}
 	}
 	else
-		print_err("server : signal interrupt!\n", info->si_pid);
-
+		kill(info->si_pid, SIGUSR2);
 }
 
 void	sa_length(int signo, siginfo_t *info, void *uncontext)
 {
-	if (g_msg.bit_cnt == 0 && g_msg.cur_pid == 0)
+	if (g_msg.cur_pid == 0)
 		g_msg.cur_pid = info->si_pid;
 	if (g_msg.cur_pid == info->si_pid)
 	{
@@ -72,15 +71,13 @@ void	sa_length(int signo, siginfo_t *info, void *uncontext)
 				print_err("server : malloc error!\n", g_msg.cur_pid);
 				init_msg();
 			}
-			kill(info->si_pid, SIGUSR1);
+			kill(g_msg.cur_pid, SIGUSR1);
 			set_sigaction(1);
-			ft_putstr_fd("len : ", 1);
-			ft_putnbr_fd(g_msg.msg_len, 1);
 			g_msg.bit_cnt = 0;
 		}
 	}
 	else
-		print_err("server : signal interrupt!\n", info->si_pid);
+		kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)
