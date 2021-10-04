@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/03 18:06:59 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 11:18:38 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	send_signal(int pid, char *bit, int len)
 	while (i < len)
 	{
 		kill(pid, SIGUSR1 + bit[i]);
-		usleep(100);
-		pause();
+		usleep(50);
+		// pause();
 		i++;
 	}
 }
@@ -69,6 +69,5 @@ int	main(int argc, char *argv[])
 			send_signal(pid, bit, 8);
 			str++;
 		}
-		pause();
 	}
 }

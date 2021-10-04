@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 17:26:44 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/03 17:56:41 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/03 19:12:29 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	print_msg(int pid, char *str, int len)
 
 void	print_err(int pid)
 {
-	write(2, "signal interrupt!\n", 12);
+	write(2, "signal interrupt!\n", 18);
 	kill(pid, SIGUSR2);
 }
