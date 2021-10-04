@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printmsg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 17:26:44 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/03 19:12:29 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 11:57:45 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	print_msg(int pid, char *str, int len)
 	ft_putstr_fd(" ]\n", 0);
 }
 
-void	print_err(int pid)
+void	print_err(char *msg, int pid)
 {
-	write(2, "signal interrupt!\n", 18);
+	ft_putstr_fd(msg, 1);
 	kill(pid, SIGUSR2);
 }
