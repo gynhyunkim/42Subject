@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 17:45:13 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/04 23:14:50 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/04 23:21:32 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	send_signal(int pid, char *bit, int len)
 	i = 0;
 	while (i < len)
 	{
-		usleep(50);
+		usleep(100);
 		kill(pid, SIGUSR1 + bit[i]);
 		i++;
 	}
@@ -46,7 +46,7 @@ static void	sig_handler(int signo)
 	}
 }
 
-int			main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	int		pid;
 	char	*str;
