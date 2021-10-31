@@ -26,8 +26,8 @@ void	convert(char c, char *b)
 
 int	main(int argc, char *argv[])
 {
-	int	pid;
-	int	cnt;
+	int		pid;
+	int		cnt;
 	char	c[8];
 	char	*str;
 
@@ -36,7 +36,9 @@ int	main(int argc, char *argv[])
 	pid = ft_atoi(argv[1]);
 	cnt = 0;
 	str = argv[2];
-	while (*str) {
+	while (*str)
+	
+	{
 		convert(*str, c);
 		for (int i = 0; i < 8; i++) {
 				kill(pid, SIGUSR1 + c[i]);
