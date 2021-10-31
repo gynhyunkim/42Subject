@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:43:32 by gkim              #+#    #+#             */
-/*   Updated: 2021/06/17 20:52:32 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/29 18:21:20 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ void	push(t_obj *o, int key)
 }
 
 int		rotate(t_obj *o, int key)
-{
+{	
+	if (key == 2)
+	{
+		rotate(o, 0);
+		rotate(o, 1);
+		return (0);
+	}
 	if (o->stack[key]->size == 0)
 		return (0);
 	add_back(pop(o->stack[key]->head->next, o->stack[key]), o->stack[key]);
@@ -48,6 +54,12 @@ int		rotate(t_obj *o, int key)
 
 void	reverse_rotate(t_obj *o, int key)
 {
+	if (key == 2)
+	{
+		reverse_rotate(o, 0);
+		reverse_rotate(o, 1);
+		return ;
+	}
 	if (o->stack[key]->size == 0)
 		return ;
 	add_front(pop(o->stack[key]->last->prev, o->stack[key]), o->stack[key]);

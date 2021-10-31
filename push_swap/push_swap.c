@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:36:04 by gkim              #+#    #+#             */
-/*   Updated: 2021/07/09 16:45:47 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/29 17:21:07 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 		else
 		{
 			quick_sort(array, 0, argc - 2);
-			quick_sort_stack(o, 0, argc - 1, array);
+			a_to_b(o, 0, argc - 1, array);
 		}
 		//i = 0;
 		// while (i < argc - 1)
