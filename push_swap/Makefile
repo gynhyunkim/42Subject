@@ -1,17 +1,20 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
+INCLUDES = ./include
 SRCS = command.c\
-		command2.c\
+		sort.c\
 		listcmd.c\
 		push_swap.c\
 		stack.c\
+		check_input.c\
+		array.c\
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) 
 	$(MAKE) all -C ./libft
-	$(CC) $^ -o $@ -lft -L./libft -I./
+	$(CC) $^ -o $@ -lft -L./libft -IINCLUDES
 
 $(OBJS) : $(SRCS)
 	$(CC) -c $^

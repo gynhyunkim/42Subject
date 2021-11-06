@@ -3,10 +3,10 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = server
 NAME2 = client
 S_SRCS = server.c \
-		list.c \
+		printmsg.c \
 		ft_put.c
 S_OBJS = server.o \
-		list.o \
+		printmsg.o \
 		ft_put.o
 C_SRCS = minitalk.c \
 		utils.c
@@ -30,7 +30,7 @@ $(C_OBJS) : $(C_SRCS)
 clean : 
 	rm -rf $(S_OBJS) $(C_OBJS)
 
-fclean :
+fclean : clean
 	rm -rf $(NAME) $(NAME2)
 
 re : fclean all

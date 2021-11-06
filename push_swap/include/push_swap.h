@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:16:09 by gkim              #+#    #+#             */
-/*   Updated: 2021/07/09 16:45:32 by gkim             ###   ########.fr       */
+/*   Updated: 2021/10/29 17:36:43 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct	s_node
 {
@@ -47,8 +47,13 @@ void	push(t_obj *o, int key);
 int		rotate(t_obj *o, int key);
 void	reverse_rotate(t_obj *o, int key);
 t_obj	*init_stack();
-void	quick_sort_stack(t_obj *o, int p, int r, int **sorted);
 void	sort(t_obj *o, int key);
-void	five_param(t_obj *o);
+void	arr_quick_sort(int *a, int p, int r);
+void	a_to_b(t_obj *o, int *sorted, int l, int r);
+void	b_to_a(t_obj *o, int *sorted, int l, int r);
+int		insert_array(int num, int *arr, int size);
+int		isSorted(t_stack *s);
+void	three_sort(t_obj *o, int key);
+void	five_param(t_obj *o, int *sorted);
 
 # endif
