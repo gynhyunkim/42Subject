@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:36:04 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/29 17:21:07 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/18 13:29:15 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,6 @@ void	print(t_obj *o, int key)
 		printf("b\n");
 }
 
-void	print_cmd(t_stack *stack)
-{
-	t_node	*node;
-
-	// node = stack->head;
-	// while (node->next->next)
-	// {
-	// 	node = node->next;
-	// 	printf("%d\n", node->data);
-	// }
-	printf("%d\n", stack->size);
-}
-
-
 int main(int argc, char **argv)
 {
 	int		i;
@@ -57,12 +43,13 @@ int main(int argc, char **argv)
 		i = 1;
 		while (i < argc)
 		{
-			add_back(init_node(ft_atoi(argv[i])), o->stack[0]);
-			if (insert_array(ft_atoi(argv[i]), array, i - 1))
+			if (insert_array(argv[i], array, i - 1))
 			{
-				ft_putstr_fd("error!\n", 2);
+				free_stack(o);
+				free(array);
 				exit(1);
 			}
+			add_back(init_node(ft_atoi(argv[i])), o->stack[0]);
 			i++;
 		}
 		if (!isSorted(o->stack[0]))
@@ -80,7 +67,12 @@ int main(int argc, char **argv)
 		
 	}
 	
-	print(o, 0);
-	print(o, 1);
-	print_cmd(o->cmd);
+	// print(o, 0);
+	// print(o, 1);
+	cmd_parsing(o->cmd);
+	// printf("%d\n", cmd_parsing(o->cmd));
+	// cnt_cmd(o->cmd);
+	free_stack(o);
+	free(array);
+	// system("leaks push_swap");
 }

@@ -9,6 +9,8 @@ SRCS = command.c\
 		stack.c\
 		check_input.c\
 		array.c\
+		ps_atoi.c\
+		cmd_parsing.c\
 
 OBJS = $(SRCS:.c=.o)
 

@@ -12,13 +12,13 @@ int		already(int *arr, int n, int size)
 
 int    main()
 {
-	int arr[500];
+	int arr[100];
 	int size = 0, num;
 
 	srand(time(NULL));
     while (size < 100)
 	{
-		num = rand() % 500 + 1;
+		num = rand() % 100 + 1;
 		if (!already(arr, num, size))
 			arr[size++] = num;
 	}

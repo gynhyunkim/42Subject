@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command2.c                                         :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:28:08 by gkim              #+#    #+#             */
-/*   Updated: 2021/10/29 18:25:20 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/18 13:24:40 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,6 @@ void	three_sort(t_obj *o, int key)
 	{
 		reverse_rotate(o, key);
 		reverse_rotate(o, key);
-	}
-}
-
-void	five_param(t_obj *o, int *sorted)
-{
-	int		i;
-	t_stack	*s;
-
-	push(o, 1);
-	push(o, 1);
-
-	three_sort(o, 0);
-	i = 2;
-	s = o->stack[0];
-	while (i--)
-	{
-		push(o, 0);
-		if (s->head->next->data > s->last->prev->data)
-			rotate(o, 0);
-		else if (s->head->next->data > s->head->next->next->data)
-			three_sort(o, 0);
 	}
 }
 
@@ -107,6 +86,27 @@ void	sort(t_obj *o, int key)
 	}
 }
 
+void	five_param(t_obj *o, int *sorted)
+{
+	int		i;
+	t_stack	*s;
+
+	push(o, 1);
+	push(o, 1);
+
+	three_sort(o, 0);
+	i = 2;
+	s = o->stack[0];
+	while (i--)
+	{
+		push(o, 0);
+		if (s->head->next->data > s->last->prev->data)
+			rotate(o, 0);
+		else if (s->head->next->data > s->head->next->next->data)
+			sort(o, 0);
+	}
+}
+
 void	sort_r(t_obj *o, int key)
 {
 	int	n1, n2, n3;
@@ -121,7 +121,7 @@ void	sort_r(t_obj *o, int key)
 	}
 	n3 = o->stack[key]->head->next->next->next->data;
 	
-	if (n2 > n1 && n2 > n3) // 231
+	if (n2 > n1 && n1 > n3) // 231
 		swap(o, key);
 	else if (n1 > n2 && n1 > n3 && n2 < n3) // 312
 	{

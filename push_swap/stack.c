@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:01:40 by gkim              #+#    #+#             */
-/*   Updated: 2021/06/17 17:29:01 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/09 20:47:12 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,26 @@ t_obj	*init_stack()
 	return (obj);
 }
 
+void	stack_clear(t_stack *s)
+{
+	t_node	*node, *next;
+
+	node = s->head;
+	while (node)
+	{
+		next = node->next;
+		free(node);
+		node = next;
+	}
+}
+
+void	free_stack(t_obj *o)
+{
+	stack_clear(o->stack[0]);
+	stack_clear(o->stack[1]);
+	stack_clear(o->cmd);
+	free(o->stack[0]);
+	free(o->stack[1]);
+	free(o->cmd);
+	free(o);
+}
