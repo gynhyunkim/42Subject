@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:16:10 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/09 19:16:13 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/20 21:09:10 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static int	partition(int *arr, int p, int r)
 {
-	int	idx, i, pivot, tmp;
+	int	idx;
+	int	i;
+	int	pivot;
+	int	tmp;
 
 	pivot = arr[r];
 	i = p;

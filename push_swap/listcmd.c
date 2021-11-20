@@ -6,16 +6,16 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:47:14 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/09 20:57:31 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/20 20:48:27 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-t_node  *init_node(int data)
+t_node	*init_node(int data)
 {
-	t_node  *node;
-	
+	t_node	*node;
+
 	node = malloc(sizeof(t_node));
 	node->data = data;
 	node->next = 0;

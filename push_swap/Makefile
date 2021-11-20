@@ -2,15 +2,17 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 INCLUDES = ./include
-SRCS = command.c\
-		sort.c\
-		listcmd.c\
-		push_swap.c\
-		stack.c\
+SRCS = array.c\
 		check_input.c\
-		array.c\
-		ps_atoi.c\
 		cmd_parsing.c\
+		command.c\
+		five_param.c\
+		listcmd.c\
+		partition.c\
+		ps_atoi.c\
+		push_swap.c\
+		sort.c\
+		stack.c\
 
 OBJS = $(SRCS:.c=.o)
 

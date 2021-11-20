@@ -6,13 +6,13 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 15:01:40 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/09 20:47:12 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/20 22:16:08 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-t_obj	*init_stack()
+t_obj	*init_stack(void)
 {
 	t_obj	*obj;
 
@@ -23,14 +23,12 @@ t_obj	*init_stack()
 	obj->stack[0]->last = init_node(0);
 	obj->stack[0]->head->next = obj->stack[0]->last;
 	obj->stack[0]->last->prev = obj->stack[0]->head;
-	
 	obj->stack[1] = malloc(sizeof(t_stack));
 	obj->stack[1]->size = 0;
 	obj->stack[1]->head = init_node(0);
 	obj->stack[1]->last = init_node(0);
 	obj->stack[1]->head->next = obj->stack[1]->last;
 	obj->stack[1]->last->prev = obj->stack[1]->head;
-	
 	obj->cmd = malloc(sizeof(t_stack));
 	obj->cmd->size = 0;
 	obj->cmd->head = init_node(0);
@@ -42,7 +40,8 @@ t_obj	*init_stack()
 
 void	stack_clear(t_stack *s)
 {
-	t_node	*node, *next;
+	t_node	*node;
+	t_node	*next;
 
 	node = s->head;
 	while (node)

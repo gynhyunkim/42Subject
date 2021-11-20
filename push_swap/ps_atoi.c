@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:37:36 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/09 19:26:55 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/20 23:49:11 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ long long	ps_atoi(const char *s, char *err_flag)
 	num = 0;
 	i = 0;
 	mark = 1;
-	len = ft_strlen(s);
 	if (s[i] == '-')
 	{
 		mark *= -1;
@@ -34,7 +33,7 @@ long long	ps_atoi(const char *s, char *err_flag)
 		num += s[i++] - '0';
 	}
 	num *= mark;
-	if (i < len || num < INT32_MIN || num > INT32_MAX)
+	if (s[i] || num < INT32_MIN || num > INT32_MAX)
 	{
 		*err_flag = 1;
 		return (0);
