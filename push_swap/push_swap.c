@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:36:04 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/20 23:55:28 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/21 00:14:37 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,4 @@ int	main(int argc, char **argv)
 		free_stack(o);
 		free(array);
 	}
-	// system("leaks push_swap");
 }

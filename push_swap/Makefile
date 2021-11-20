@@ -16,14 +16,14 @@ SRCS = array.c\
 
 OBJS = $(SRCS:.c=.o)
 
+all : $(NAME)
+
 $(NAME) : $(OBJS) 
 	$(MAKE) all -C ./libft
 	$(CC) $^ -o $@ -lft -L./libft -IINCLUDES
 
 $(OBJS) : $(SRCS)
 	$(CC) -c $^
-
-all : $(NAME)
 
 clean :
 	$(MAKE) clean -C ./libft
