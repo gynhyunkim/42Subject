@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:37:36 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/20 23:49:11 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/21 13:54:24 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ long long	ps_atoi(const char *s, char *err_flag)
 	long long	num;
 	int			mark;
 	int			i;
-	int			len;
 
 	num = 0;
 	i = 0;

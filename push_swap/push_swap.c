@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 14:36:04 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/21 00:14:37 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/21 13:54:41 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	check_input(t_obj *o, int *array, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_node	*node;
 	t_obj	*o;
 	int		*array;
 
@@ -41,7 +40,7 @@ int	main(int argc, char **argv)
 		{
 			if (argc == 4)
 				three_sort(o, 0);
-			else if (argc == 6)
+			else if (argc <= 6)
 				five_param(o);
 			else
 			{

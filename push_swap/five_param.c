@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   five_param.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:33:20 by gkim              #+#    #+#             */
-/*   Updated: 2021/11/20 22:18:30 by gkim             ###   ########.fr       */
+/*   Updated: 2021/11/21 13:51:47 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ static int	find_min(t_obj *o)
 
 static void	push_minimum(t_obj *o)
 {
-	int	cnt;
 	int	idx;
 
-	cnt = 2;
-	while (cnt--)
+	while (o->stack[0]->size > 3)
 	{
 		idx = find_min(o);
 		if (idx < o->stack[0]->size / 2)

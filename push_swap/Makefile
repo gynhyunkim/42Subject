@@ -15,15 +15,16 @@ SRCS = array.c\
 		stack.c\
 
 OBJS = $(SRCS:.c=.o)
+LIBFT_DIR = libft/
 
 all : $(NAME)
 
 $(NAME) : $(OBJS) 
 	$(MAKE) all -C ./libft
-	$(CC) $^ -o $@ -lft -L./libft -IINCLUDES
+	$(CC) $(CFLAGS) $^ -o $@ -lft -L$(LIBFT_DIR) -I$(INCLUDES)
 
-$(OBJS) : $(SRCS)
-	$(CC) -c $^
+%.o : %.c 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	$(MAKE) clean -C ./libft
