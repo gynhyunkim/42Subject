@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 12:35:27 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/12 17:37:27 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/13 23:05:49 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <pthread.h>
+# include <sys/time.h>
+# include <string.h>
 
 typedef struct s_philo
 {
@@ -31,11 +33,16 @@ typedef struct s_time
 	int	sleep;
 }	t_time;
 
-typedef struct s_main
+typedef struct s_info
 {
 	t_philo	*philos;
 	int		*fork;
-	t_time	time;	
-}	t_main;
+	t_time	time;
+	int		num;
+}	t_info;
+
+int	ft_atoi(const char *nptr);
+int	check_args(char **argv);
+int	init_philo(t_info *info, int num);
 
 #endif
