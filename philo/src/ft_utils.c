@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 21:06:43 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/16 16:33:06 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 02:28:09 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_state(t_info *info, int p_id, char *str)
 {
 	pthread_mutex_lock(&info->print);
 	if (!info->dead_flag)
-		printf("%lldms %d %s\n", get_time() - info->start_time, p_id, str);
+		printf("%lld %d %s\n", get_time() - info->start_time, p_id, str);
 	pthread_mutex_unlock(&info->print);
 }
 

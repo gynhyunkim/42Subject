@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 12:35:27 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/16 16:09:55 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 03:21:41 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ typedef struct s_philo
 	int			left_fork;
 	int			right_fork;
 	int			eat_count;
-	long long	check_time;
+	long long	last_eat_time;
 	pthread_t	t_id;
 	t_info		*info;
 }	t_philo;
 
 int			ft_atoi(const char *nptr);
-int			check_args(t_info *info);
 int			init_info(t_info *info, int argc, char **argv);
 int			print_error(char *str);
 long long	get_time(void);

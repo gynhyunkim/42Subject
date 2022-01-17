@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 14:50:10 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/16 16:36:37 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 03:18:32 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_dead(t_info *info)
 		while (i < info->num_philo && !info->dead_flag)
 		{
 			pthread_mutex_lock(&info->eat);
-			if (get_time() - info->philo[i].check_time > info->time_die)
+			if (get_time() - info->philo[i].last_eat_time > info->time_die)
 			{
 				print_state(info, info->philo[i].p_id, "died");
 				info->dead_flag = 1;

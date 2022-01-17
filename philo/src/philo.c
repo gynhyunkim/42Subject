@@ -6,7 +6,7 @@
 /*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:31:19 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/16 16:38:29 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 03:48:49 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->info->eat);
 	philo->eat_count++;
-	philo->check_time = get_time();
+	philo->last_eat_time = get_time();
 	pthread_mutex_unlock(&philo->info->eat);
 	while (!philo->info->dead_flag)
 	{
-		if (get_time() - philo->check_time >= philo->info->time_eat)
+		if (get_time() - philo->last_eat_time >= philo->info->time_eat)
 			break ;
 		usleep(10);
 	}
@@ -78,7 +78,7 @@ int	start_philo(t_info *info)
 	i = 0;
 	while (i < info->num_philo)
 	{
-		info->philo[i].check_time = get_time();
+		info->philo[i].last_eat_time = get_time();
 		if (pthread_create(&info->philo[i].t_id, NULL,
 				func_philo, &info->philo[i]))
 			return (-1);
