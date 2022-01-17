@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 23:05:20 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/17 03:16:45 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 14:23:20 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	init_philo(t_info *info)
 		info->philo[i].right_fork = (i + 1) % info->num_philo;
 		info->philo[i].eat_count = 0;
 		info->philo[i].info = info;
+		info->philo[i].last_eat_time = 0;
 		i++;
 	}
 	return (0);

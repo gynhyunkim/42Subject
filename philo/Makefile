@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = philo
 SRCDIR = ./src/
 SRC = main.c ft_utils.c init.c error.c\
-		philo.c dead.c
+		philo.c monitoring.c
 SRCS = $(addprefix ${SRCDIR}, ${SRC})
 OBJS = $(SRCS:.c=.o)
 
@@ -22,3 +22,5 @@ fclean : clean
 	rm $(NAME)
 
 re : fclean all
+
+.PHONY : all clean fclean re

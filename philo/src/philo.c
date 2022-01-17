@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkim <gkim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gkim <gkim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:31:19 by gkim              #+#    #+#             */
-/*   Updated: 2022/01/17 03:48:49 by gkim             ###   ########.fr       */
+/*   Updated: 2022/01/17 15:48:58 by gkim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	sleeping(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->eat);
 	philo->eat_count++;
+	print_state(philo->info, philo->p_id, "is eating");
+	pthread_mutex_lock(&philo->info->eat);
 	philo->last_eat_time = get_time();
 	pthread_mutex_unlock(&philo->info->eat);
 	while (!philo->info->dead_flag)
@@ -46,7 +47,6 @@ void	philo_eat(t_philo *philo)
 	print_state(philo->info, philo->p_id, "has taken a fork");
 	pthread_mutex_lock(&philo->info->forks[philo->right_fork]);
 	print_state(philo->info, philo->p_id, "has taken a fork");
-	print_state(philo->info, philo->p_id, "is eating");
 	eating(philo);
 	pthread_mutex_unlock(&philo->info->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->info->forks[philo->right_fork]);
@@ -58,7 +58,7 @@ void	*func_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->p_id % 2)
-		usleep(10000);
+		usleep(100);
 	while (!philo->info->dead_flag)
 	{
 		philo_eat(philo);
@@ -78,7 +78,6 @@ int	start_philo(t_info *info)
 	i = 0;
 	while (i < info->num_philo)
 	{
-		info->philo[i].last_eat_time = get_time();
 		if (pthread_create(&info->philo[i].t_id, NULL,
 				func_philo, &info->philo[i]))
 			return (-1);
